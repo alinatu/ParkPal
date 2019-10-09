@@ -36,8 +36,9 @@ public class ParkListAdapter extends ArrayAdapter<JSONObject> {
         // Populate the data into the template view using the data object
         try {
             String name = jsonObject.getJSONObject("properties").get("Name").toString();
-            if (name != "null" || name != "") {
+            if (name != "null" || name != "" || name != null || !name.isEmpty()) {
                 // Lookup view for data population
+                System.out.println(name);
                 TextView parkName = convertView.findViewById(R.id.parkName);
                 parkName.setText(name);
             }

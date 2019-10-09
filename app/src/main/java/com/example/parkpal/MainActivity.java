@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Making a request to url and getting response
             jsonStr = sh.loadJSONFromAsset(getApplicationContext());
+            //jsonStr = sh.makeServiceCall(SERVICE_URL);
 
             if (jsonStr != null) {
                 try {
@@ -71,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
                     // looping through All Contacts
                     for (int i = 0; i < jsonParks.length(); i++) {
                         JSONObject c = jsonParks.getJSONObject(i);
-
-                        parkList.add(c);
+                        // This will not add parks with no-name into our list.
+                        if (!c.getJSONObject("properties").get("Name").equals(null)) {
+                            parkList.add(c);
+                        }
 
                     }
                 } catch (final JSONException e) {
