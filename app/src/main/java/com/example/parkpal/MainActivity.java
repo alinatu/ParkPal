@@ -3,9 +3,11 @@ package com.example.parkpal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         parkList = new ArrayList<JSONObject>();
         lv = findViewById(R.id.park_list);
         new GetContacts().execute();
+    }
+
+    public void onMapButtonClick(View v) {
+        Intent i = new Intent(this, AllParksMapsActivity.class);
+        startActivity(i);
     }
 
     /**
