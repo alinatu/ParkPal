@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ParkPal</string>
+    <string name="view_map">View Map</string>
+    <string name="title_activity_all_parks_map">AllParksMapsActivity</string>
+    <string name="title_activity_all_parks_maps">Map</string>
 </resources>
