@@ -1,0 +1,580 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "PLAYGROUNDS",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9085009750676, 49.216567684139285 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Queen's Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.9085009750676",
+				"Y" : "49.216567684139285"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94382713667734, 49.2019330614465 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Grimson Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94382713667734",
+				"Y" : "49.2019330614465"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89113965921965, 49.234039582724755 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Hume Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.89113965921965",
+				"Y" : "49.234039582724755"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91455010418109, 49.20427599829555 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Toronto Place Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91455010418109",
+				"Y" : "49.20427599829555"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91723572533964, 49.20426362618019 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Simcoe Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91723572533964",
+				"Y" : "49.20426362618019"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91728388884046, 49.20413299768054 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Simcoe Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91728388884046",
+				"Y" : "49.20413299768054"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92319276035953, 49.194359668397446 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Port Royal Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.92319276035953",
+				"Y" : "49.194359668397446"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92327579962746, 49.19420407048543 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Port Royal Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.92327579962746",
+				"Y" : "49.19420407048543"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94191408484359, 49.185620074553285 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Ryall Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94191408484359",
+				"Y" : "49.185620074553285"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94232680514477, 49.18540322325806 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Ryall Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94232680514477",
+				"Y" : "49.18540322325806"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94292230837227, 49.185367343490384 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Ryall Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94292230837227",
+				"Y" : "49.185367343490384"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94203854351377, 49.18504149738609 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Ryall Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94203854351377",
+				"Y" : "49.18504149738609"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.95605606427439, 49.17719632268285 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "West Queensborough Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.95605606427439",
+				"Y" : "49.17719632268285"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93340278466033, 49.20492050101675 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Riverside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93340278466033",
+				"Y" : "49.20492050101675"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93338228430001, 49.20476912084189 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Riverside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93338228430001",
+				"Y" : "49.20476912084189"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93370372378061, 49.20478287159281 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Riverside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93370372378061",
+				"Y" : "49.20478287159281"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92223710005845, 49.198228111568 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Quayside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.92223710005845",
+				"Y" : "49.198228111568"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92225038676925, 49.19855596706944 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Quayside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.92225038676925",
+				"Y" : "49.19855596706944"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89519729733983, 49.2273126517069 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sapperton Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.89519729733983",
+				"Y" : "49.2273126517069"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89476847794869, 49.22731940140962 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sapperton Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.89476847794869",
+				"Y" : "49.22731940140962"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89460178604413, 49.2270991002767 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sapperton Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.89460178604413",
+				"Y" : "49.2270991002767"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91309163434939, 49.22118953129453 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Terry Hughes Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91309163434939",
+				"Y" : "49.22118953129453"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91292096559059, 49.221129902640556 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Terry Hughes Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91292096559059",
+				"Y" : "49.221129902640556"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91293718495638, 49.2209980630715 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Terry Hughes Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91293718495638",
+				"Y" : "49.2209980630715"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.925013134611, 49.21140465688362 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Moody Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.925013134611",
+				"Y" : "49.21140465688362"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90502101730928, 49.20342270336442 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Westminster Pier Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.90502101730928",
+				"Y" : "49.20342270336442"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90652341010599, 49.20258902122069 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Westminster Pier Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.90652341010599",
+				"Y" : "49.20258902122069"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.95482386242648, 49.20321543266596 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Connaught Heights Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.95482386242648",
+				"Y" : "49.20321543266596"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9222270607208, 49.19841706652604 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Quayside Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.9222270607208",
+				"Y" : "49.19841706652604"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93375206816958, 49.19083105404247 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Old Schoolhouse Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93375206816958",
+				"Y" : "49.19083105404247"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93369850402576, 49.19069678976455 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Old Schoolhouse Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93369850402576",
+				"Y" : "49.19069678976455"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92733422420845, 49.19311645496642 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Red Boat Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.92733422420845",
+				"Y" : "49.19311645496642"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91805022614383, 49.221400237442 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sinclair Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91805022614383",
+				"Y" : "49.221400237442"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91779513315909, 49.221285171284194 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sinclair Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91779513315909",
+				"Y" : "49.221285171284194"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91004334890962, 49.21212841309653 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sullivan Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91004334890962",
+				"Y" : "49.21212841309653"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91011669425811, 49.21224925529302 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sullivan Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91011669425811",
+				"Y" : "49.21224925529302"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91010043806345, 49.21219896529151 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Sullivan Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.91010043806345",
+				"Y" : "49.21219896529151"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94009620793537, 49.18930086265837 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Suhk Sagar Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.94009620793537",
+				"Y" : "49.18930086265837"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.93997749417423, 49.189280094695384 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Suhk Sagar Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.93997749417423",
+				"Y" : "49.189280094695384"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9046544827022, 49.23030871636112 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Victory Heights Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.9046544827022",
+				"Y" : "49.23030871636112"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90477818421593, 49.23048203376994 ]
+			},
+			"properties" : {
+				"TYPE" : "Playground",
+				"PARK" : "Victory Heights Park",
+				"ACTIVITIES" : null,
+				"X" : "-122.90477818421593",
+				"Y" : "49.23048203376994"
+			}
+		}
+	]
+}

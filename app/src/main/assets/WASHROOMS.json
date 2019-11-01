@@ -1,0 +1,618 @@
+{
+	"type" : "FeatureCollection",
+	"name" : "WASHROOMS",
+	"features" : [
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94901504819211, 49.200040264848816 ]
+			},
+			"properties" : {
+				"Name" : "22nd Street Skytrain Station",
+				"Category" : "Transit",
+				"Address" : "2120 SEVENTH AVE",
+				"Neighbourhood" : "Connaught Heights",
+				"Hours" : "Only if attendant is present",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.94901504819211",
+				"Y" : "49.200040264848816"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91140110291825, 49.20165388399086 ]
+			},
+			"properties" : {
+				"Name" : "Anvil Centre",
+				"Category" : "Civic Facilities",
+				"Address" : "777 COLUMBIA ST",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "All days (except Thursday) (8:00 am - 5:00 pm), Thursdays (8:00 am - 8:00 pm)",
+				"Source" : "http://anvilcentre.com/",
+				"Accessible" : "Yes",
+				"X" : "-122.91140110291825",
+				"Y" : "49.20165388399086"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.8828773168974, 49.23312457925954 ]
+			},
+			"properties" : {
+				"Name" : "Braid Skytrain Station",
+				"Category" : "Transit",
+				"Address" : "97 BRAID ST",
+				"Neighbourhood" : "Brunette Creek",
+				"Hours" : "Only if attendant is present",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.8828773168974",
+				"Y" : "49.23312457925954"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9077391996295, 49.221691230331714 ]
+			},
+			"properties" : {
+				"Name" : "Canada Games Pool",
+				"Category" : "Civic Facilities",
+				"Address" : "65 E SIXTH AVE",
+				"Neighbourhood" : "Glenbrooke South",
+				"Hours" : "Monday- Thursday (6:00 am - 9:55 pm), Friday (6:00 am - 10:25 pm), Saturday (8:00 am - 8:25pm), Sunday (8:00 am - 9:55 pm)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/canada-games-pool#about ",
+				"Accessible" : "Yes",
+				"X" : "-122.9077391996295",
+				"Y" : "49.221691230331714"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90673419605675, 49.22140798524719 ]
+			},
+			"properties" : {
+				"Name" : "Centennial Community Centre",
+				"Category" : "Civic Facilities",
+				"Address" : "65 E SIXTH AVE",
+				"Neighbourhood" : "Glenbrooke South",
+				"Hours" : "Monday - Thursday (9:00 am - 8:30 pm), Friday (9:00 am - 8:00 pm), Saturday (8:00 am - 1:00 pm), Sunday (8:30 am - 12:00 pm)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/centennial-community-centre#about ",
+				"Accessible" : "Yes",
+				"X" : "-122.90673419605675",
+				"Y" : "49.22140798524719"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92596615856257, 49.21194184765515 ]
+			},
+			"properties" : {
+				"Name" : "Century House",
+				"Category" : "Civic Facilities",
+				"Address" : "620 EIGHTH ST",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "Monday - Friday (9:00 am - 9:00 pm), Saturday (9:00 am - 4:00 pm), Sunday (12:00 pm - 4:00 pm). ",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/century-house#about ",
+				"Accessible" : "Yes",
+				"X" : "-122.92596615856257",
+				"Y" : "49.21194184765515"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91100088543958, 49.20681003475795 ]
+			},
+			"properties" : {
+				"Name" : "City Hall",
+				"Category" : "Civic Facilities",
+				"Address" : "511 ROYAL AVE",
+				"Neighbourhood" : "Uptown",
+				"Hours" : "Monday (8:00 am - 7:00 pm), Tuesday-Friday (8:00 am - 5:00 pm)",
+				"Source" : "https://www.newwestcity.ca/",
+				"Accessible" : "Yes",
+				"X" : "-122.91100088543958",
+				"Y" : "49.20681003475795"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90620538189134, 49.20478682324384 ]
+			},
+			"properties" : {
+				"Name" : "Columbia Skytrain Station (Shops @ New West)",
+				"Category" : "Transit",
+				"Address" : "425 COLUMBIA ST",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "Only if attendant is present",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.90620538189134",
+				"Y" : "49.20478682324384"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91274780006742, 49.20350200960621 ]
+			},
+			"properties" : {
+				"Name" : "Douglas College",
+				"Category" : "Other",
+				"Address" : "700 ROYAL AVE",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "Monday - Friday (6:30 am - 11:00 pm), Saturday (6:30 am - 7:00 pm), Sunday (8:00 am - 6:00 pm*variable)",
+				"Source" : "https://www.douglascollege.ca/",
+				"Accessible" : "Yes",
+				"X" : "-122.91274780006742",
+				"Y" : "49.20350200960621"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94420811207186, 49.20181986662713 ]
+			},
+			"properties" : {
+				"Name" : "Grimston Park",
+				"Category" : "Parks",
+				"Address" : "1900 SEVENTH AVE ",
+				"Neighbourhood" : "West End",
+				"Hours" : "8:30 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.94420811207186",
+				"Y" : "49.20181986662713"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89131237349633, 49.23545229034145 ]
+			},
+			"properties" : {
+				"Name" : "Hume Park (Lower)",
+				"Category" : "Parks",
+				"Address" : "660 E COLUMBIA ST",
+				"Neighbourhood" : "Sapperton",
+				"Hours" : "8:00 am - 5:00 pm ",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.89131237349633",
+				"Y" : "49.23545229034145"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.8917483016072, 49.23319363209348 ]
+			},
+			"properties" : {
+				"Name" : "Hume Park (Upper)",
+				"Category" : "Parks",
+				"Address" : "660 E COLUMBIA ST",
+				"Neighbourhood" : "Sapperton",
+				"Hours" : "8:30 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.8917483016072",
+				"Y" : "49.23319363209348"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90935476630372, 49.222032358795495 ]
+			},
+			"properties" : {
+				"Name" : "Justice Institute",
+				"Category" : "Other",
+				"Address" : "715 MCBRIDE BLVD",
+				"Neighbourhood" : "Glenbrooke South",
+				"Hours" : "Monday - Friday (6:00 am - 10:00 pm), Saturday - Sunday (7:30 am - 5:30 pm)",
+				"Source" : "http://www.jibc.ca/",
+				"Accessible" : "Yes",
+				"X" : "-122.90935476630372",
+				"Y" : "49.222032358795495"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92612930431949, 49.21754083196209 ]
+			},
+			"properties" : {
+				"Name" : "Mercer Stadium",
+				"Category" : "Parks",
+				"Address" : "830 SIXTH ST",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "6:00 am - 10:30 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.92612930431949",
+				"Y" : "49.21754083196209"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92830401593814, 49.2113052112087 ]
+			},
+			"properties" : {
+				"Name" : "Moody Park Outdoor Pool",
+				"Category" : "Parks",
+				"Address" : "600 EIGHTH ST",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "7:00 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.92830401593814",
+				"Y" : "49.2113052112087"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92617839936446, 49.215563319745776 ]
+			},
+			"properties" : {
+				"Name" : "Moody Park Arena",
+				"Category" : "Civic Facilities",
+				"Address" : "701 EIGHTH AVE",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "8:30 am - 8:30 pm ",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/moody-park-arena#about ",
+				"Accessible" : "Yes",
+				"X" : "-122.92617839936446",
+				"Y" : "49.215563319745776"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92238139993357, 49.21167215992836 ]
+			},
+			"properties" : {
+				"Name" : "New Westminster Public Library ",
+				"Category" : "Civic Facilities",
+				"Address" : "716 SIXTH AVE",
+				"Neighbourhood" : "Uptown",
+				"Hours" : "Monday - Thursday (9:30 am - 9:00 pm), Friday & Saturday (9:30 am - 6:00 pm), Sunday (12:00 -5:00 pm)",
+				"Source" : "http://www.nwpl.ca/",
+				"Accessible" : "Yes",
+				"X" : "-122.92238139993357",
+				"Y" : "49.21167215992836"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91248089613795, 49.201507982147724 ]
+			},
+			"properties" : {
+				"Name" : "New Westminster Skytrain Station",
+				"Category" : "Transit",
+				"Address" : "800 COLUMBIA ST",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "Only if attendant is present",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.91248089613795",
+				"Y" : "49.201507982147724"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92321948621688, 49.1948573545511 ]
+			},
+			"properties" : {
+				"Name" : "Port Royal Park",
+				"Category" : "Parks",
+				"Address" : "215 SALTER ST",
+				"Neighbourhood" : "North Arm South",
+				"Hours" : "8:30 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.92321948621688",
+				"Y" : "49.1948573545511"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92213338230236, 49.198871890666815 ]
+			},
+			"properties" : {
+				"Name" : "Quayside Park",
+				"Category" : "Parks",
+				"Address" : "1264 QUAYSIDE DR",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "7:00 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.92213338230236",
+				"Y" : "49.198871890666815"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90798938711737, 49.21608849322798 ]
+			},
+			"properties" : {
+				"Name" : "Queen's Park Treats Concession",
+				"Category" : "Parks",
+				"Address" : "600 FIRST ST",
+				"Neighbourhood" : "Glenbrooke South",
+				"Hours" : "8:00 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.90798938711737",
+				"Y" : "49.21608849322798"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9055465153601, 49.21465533904195 ]
+			},
+			"properties" : {
+				"Name" : "Queen's Park Arena",
+				"Category" : "Civic Facilities",
+				"Address" : "600 FIRST ST",
+				"Neighbourhood" : "Glenbrooke South",
+				"Hours" : "Monday - Friday (9:00 am - 4:00 pm)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/queens-park-arena#about",
+				"Accessible" : "Yes",
+				"X" : "-122.9055465153601",
+				"Y" : "49.21465533904195"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.94361690066813, 49.18588393005644 ]
+			},
+			"properties" : {
+				"Name" : "Queensborough Community Centre",
+				"Category" : "Civic Facilities",
+				"Address" : "920 EWEN AVE",
+				"Neighbourhood" : "Queensborough",
+				"Hours" : "Monday - Friday (7:00 am - 9:30 pm), Saturday (8:30 am - 5:30 pm), Sunday (8:30 am - 8:30 pm)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/facilities/queensborough-community-centre#about ",
+				"Accessible" : "Yes",
+				"X" : "-122.94361690066813",
+				"Y" : "49.18588393005644"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91171386730377, 49.20006237574489 ]
+			},
+			"properties" : {
+				"Name" : "River Market",
+				"Category" : "Other",
+				"Address" : "810 QUAYSIDE DR",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "7 days a week (hours vary)",
+				"Source" : "http://rivermarket.ca/ ",
+				"Accessible" : "Yes",
+				"X" : "-122.91171386730377",
+				"Y" : "49.20006237574489"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92234178167648, 49.21264407479054 ]
+			},
+			"properties" : {
+				"Name" : "Royal City Centre",
+				"Category" : "Other",
+				"Address" : "610 SIXTH ST",
+				"Neighbourhood" : "Uptown",
+				"Hours" : "Monday-Wednesday (9:30 am - 5:30 pm), Thursday - Friday (9:30 am - 9:00 pm), Saturday (9:30 am - 5:30 pm), Sunday (12:00 pm - 5:00 pm)",
+				"Source" : "https://www.royalcitycentre.ca/ ",
+				"Accessible" : "Yes",
+				"X" : "-122.92234178167648",
+				"Y" : "49.21264407479054"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89228720007124, 49.226179729908225 ]
+			},
+			"properties" : {
+				"Name" : "Royal Columbian Hospital",
+				"Category" : "Other",
+				"Address" : "330 E COLUMBIA ST",
+				"Neighbourhood" : "Sapperton",
+				"Hours" : "24 hours",
+				"Source" : "http://www.fraserhealth.ca/find-us/hospitals/royal-columbian-hospital/ ",
+				"Accessible" : "Yes",
+				"X" : "-122.89228720007124",
+				"Y" : "49.226179729908225"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91418961604236, 49.22189848237378 ]
+			},
+			"properties" : {
+				"Name" : "Royal Square Shopping Centre",
+				"Category" : "Other",
+				"Address" : "800 MCBRIDE BLVD",
+				"Neighbourhood" : "Glenbrooke North",
+				"Hours" : null,
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.91418961604236",
+				"Y" : "49.22189848237378"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.89440185858471, 49.22706105213093 ]
+			},
+			"properties" : {
+				"Name" : "Sapperton Park",
+				"Category" : "Parks",
+				"Address" : "351 E COLUMBIA ST",
+				"Neighbourhood" : "Sapperton",
+				"Hours" : "8:30 am - 6:00 pm (8:30 pm on weekends)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.89440185858471",
+				"Y" : "49.22706105213093"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.88940040609741, 49.22474167608936 ]
+			},
+			"properties" : {
+				"Name" : "Sapperton Skytrain Station",
+				"Category" : "Transit",
+				"Address" : "306 BRUNETTE AVE",
+				"Neighbourhood" : "Brunette Creek",
+				"Hours" : "Only if attendant is present",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.88940040609741",
+				"Y" : "49.22474167608936"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9111998459578, 49.22100477605841 ]
+			},
+			"properties" : {
+				"Name" : "Terry Hughes Park",
+				"Category" : "Parks",
+				"Address" : "701 PARK CRES",
+				"Neighbourhood" : "Glenbrooke North",
+				"Hours" : "8:30 am - 4:30 pm (weekends only)",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.9111998459578",
+				"Y" : "49.22100477605841"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.91878769938216, 49.21260192008228 ]
+			},
+			"properties" : {
+				"Name" : "Westminster Centre",
+				"Category" : "Other",
+				"Address" : "555 SIXTH ST",
+				"Neighbourhood" : "Uptown",
+				"Hours" : "?",
+				"Source" : null,
+				"Accessible" : "Yes",
+				"X" : "-122.91878769938216",
+				"Y" : "49.21260192008228"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.90501543122706, 49.203427101070524 ]
+			},
+			"properties" : {
+				"Name" : "Westminster Pier Park",
+				"Category" : "Parks",
+				"Address" : "1 SIXTH ST",
+				"Neighbourhood" : "Downtown",
+				"Hours" : "8:30 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.90501543122706",
+				"Y" : "49.203427101070524"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.9259893478443, 49.211663032040896 ]
+			},
+			"properties" : {
+				"Name" : "Youth Centre ",
+				"Category" : "Civic Facilities",
+				"Address" : "600 EIGHTH ST",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "Monday - Thursday (3:15pm - 9:00 pm), Friday & Saturday (3:15 pm - 11:00 pm)",
+				"Source" : "http://www.newwestyouth.ca/",
+				"Accessible" : "Yes",
+				"X" : "-122.9259893478443",
+				"Y" : "49.211663032040896"
+			}
+		},
+		{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [ -122.92539462135117, 49.21126125368026 ]
+			},
+			"properties" : {
+				"Name" : "Moody Park Spray Park and Playground",
+				"Category" : "Parks",
+				"Address" : "600 EIGHTH ST",
+				"Neighbourhood" : "Kelvin",
+				"Hours" : "7:00 am - 6:00 pm",
+				"Source" : "https://www.newwestcity.ca/parks-and-recreation/parks/amenities#washrooms",
+				"Accessible" : "Yes",
+				"X" : "-122.92539462135117",
+				"Y" : "49.21126125368026"
+			}
+		}
+	]
+}
