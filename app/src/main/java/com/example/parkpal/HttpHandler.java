@@ -11,6 +11,7 @@ package com.example.parkpal;
         import java.io.InputStream;
         import java.io.InputStreamReader;
         import java.io.OutputStream;
+        import java.io.UnsupportedEncodingException;
         import java.net.HttpURLConnection;
         import java.net.MalformedURLException;
         import java.net.ProtocolException;
@@ -62,12 +63,24 @@ public class HttpHandler {
 //        return sb.toString();
 //    }
 
-    public String loadJSONFromAsset(Context context) {
+    public String[] loadJSONFromAsset(Context context) {
+        String[] jsonFiles = context.getResources().getStringArray(R.array.JsonFiles);
+        String[] json = new String[jsonFiles.length];
+            try {
+                for(int i = 0; i < jsonFiles.length; i++) {
+                    json[i] = GetJsonContent(context.getAssets().open(jsonFiles[i]));
+                }
+        } catch (
+                IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
 
+    public String GetJsonContent(InputStream is) {
         String json = null;
         try {
-            InputStream is = context.getAssets().open("PARKS.json");
-
             int size = is.available();
 
             byte[] buffer = new byte[size];
@@ -77,12 +90,8 @@ public class HttpHandler {
             is.close();
 
             json = new String(buffer, "UTF-8");
-
-
-        } catch (
-                IOException ex) {
-            ex.printStackTrace();
-            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return json;
     }
