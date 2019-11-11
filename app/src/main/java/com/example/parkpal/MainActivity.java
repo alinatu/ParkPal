@@ -72,15 +72,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... arg0) {
             HttpHandler sh = new HttpHandler();
-            String jsonStr = null;
-
             // Making a request to url and getting response
-            jsonStr = sh.loadJSONFromAsset(getApplicationContext());
+            String[] jsonStr = sh.loadJSONFromAsset(getApplicationContext());
             //jsonStr = sh.makeServiceCall(SERVICE_URL);
 
             if (jsonStr != null) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONObject jsonObj = new JSONObject(jsonStr[0]);
 
                     // Getting JSON Array node
                     JSONArray jsonParks = jsonObj.getJSONArray("features");

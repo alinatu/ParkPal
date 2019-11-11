@@ -1,13 +1,19 @@
 package com.example.parkpal;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonLayer;
@@ -20,6 +26,7 @@ import org.json.JSONArray;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AllParksMapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -57,19 +64,78 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
 
         HttpHandler sh = new HttpHandler();
-        String jsonString = sh.loadJSONFromAsset(getApplicationContext());
+        String[] jsonString = sh.loadJSONFromAsset(getApplicationContext());
 
         try {
-            JSONObject jsonObj = new JSONObject(jsonString);
+            JSONObject jsonObj = new JSONObject(jsonString[0]);
             JSONArray jsonParks = jsonObj.getJSONArray("features");
+//            LatLng test = new LatLng(-122, 49);
             // looping through All Contacts
             for (int i = 0; i < jsonParks.length(); i++) {
                 JSONObject parksObj = jsonParks.getJSONObject(i);
-                 GeoJsonLayer layer = new GeoJsonLayer(mMap, parksObj);
+                GeoJsonLayer layer = new GeoJsonLayer(mMap, parksObj);
+//                layer.getBoundingBox().contains(test);
+                layer.addLayerToMap();
+            }
+
+            for(int i = 1; i < jsonString.length; i++) {
+                getGeoJsonPointFromJsonFile(jsonString[i]);
+            }
+
+//            JSONArray jsonWashrooms = Washrooms.getJSONArray("features");
+//
+//            for (int i = 0; i < jsonWashrooms.length(); i++) {
+//                JSONObject WashroomsObj = jsonWashrooms.getJSONObject(i);
+//                GeoJsonLayer layer = new GeoJsonLayer(mMap, WashroomsObj);
+//                GeoJsonPointStyle WashroomStyle = layer.getDefaultPointStyle();
+//                WashroomStyle.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.washroom));
+//                layer.addLayerToMap();
+//            }
+        } catch (JSONException e) {
+            Log.e("Reading JSON to Array", "File not found: " + e.toString());
+        }
+    }
+
+    public void getGeoJsonPointFromJsonFile(String JsonString) {
+        try {
+            JSONObject JObj = new JSONObject(JsonString);
+            JSONArray JArray = JObj.getJSONArray("features");
+            BitmapDrawable bitmapDraw = null;
+            String type = JObj.getString("name");
+
+            switch (type) {
+                case "WASHROOMS":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.washroom);
+                    break;
+                case "BENCHES":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.bench);
+                    break;
+                case "OFFLEASH_DOG_AREAS":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.dog_leash);
+                    break;
+                case "DRINKING_FOUNTAINS":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.drinking_fountains);
+                    break;
+                case "PLAYGROUNDS":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.playground);
+                    break;
+                case "SPORTS_FIELDS":
+                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.sport_field);
+                    break;
+            }
+            Bitmap b = bitmapDraw.getBitmap();
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, 60, 60, false);
+
+            for (int i = 0; i < JArray.length(); i++) {
+                JSONObject Obj = JArray.getJSONObject(i);
+                GeoJsonLayer layer = new GeoJsonLayer(mMap, Obj);
+                GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
+                pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                pointStyle.setTitle(type);
                 layer.addLayerToMap();
             }
         } catch (JSONException e) {
-            Log.e("Reading JSON to Array", "File not found: " + e.toString());
+            e.printStackTrace();
         }
     }
 }

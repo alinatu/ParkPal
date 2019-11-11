@@ -3,4 +3,13 @@
     <string name="view_map">View Map</string>
     <string name="title_activity_all_parks_map">AllParksMapsActivity</string>
     <string name="title_activity_all_parks_maps">Map</string>
+    <string-array name="JsonFiles">
+        <item>PARKS.json</item>
+        <item>PLAYGROUNDS.json</item>
+        <item>SPORTS_FIELDS.json</item>
+        <item>WASHROOMS.json</item>
+        <item>DRINKING_FOUNTAINS.json</item>
+        <item>OFFLEASH_DOG_AREAS.json</item>
+        <item>BENCHES.json</item>
+    </string-array>
 </resources>
