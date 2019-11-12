@@ -24,6 +24,10 @@ import org.json.JSONObject;
 //import org.json.simple.parser.JSONParser;
 import org.json.JSONArray;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,13 @@ import java.util.List;
 public class AllParksMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    ArrayList<GeoJsonLayer> parkLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> benchLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> fountainLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> dogareaLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> washroomLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> playgroundLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<GeoJsonLayer> sportsfieldLayers = new ArrayList<GeoJsonLayer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,18 +80,128 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         try {
             JSONObject jsonObj = new JSONObject(jsonString[0]);
             JSONArray jsonParks = jsonObj.getJSONArray("features");
-//            LatLng test = new LatLng(-122, 49);
             // looping through All Contacts
             for (int i = 0; i < jsonParks.length(); i++) {
                 JSONObject parksObj = jsonParks.getJSONObject(i);
                 GeoJsonLayer layer = new GeoJsonLayer(mMap, parksObj);
-//                layer.getBoundingBox().contains(test);
+                parkLayers.add(layer);
                 layer.addLayerToMap();
             }
 
             for(int i = 1; i < jsonString.length; i++) {
                 getGeoJsonPointFromJsonFile(jsonString[i]);
             }
+
+            final Button back_Button = findViewById(R.id.back_Button);
+            back_Button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+            final ToggleButton parks_Toggle_Button = findViewById(R.id.parks_Toggle_Button);
+            parks_Toggle_Button.setChecked(true);
+
+            parks_Toggle_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < parkLayers.size(); i++) {
+                            parkLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < parkLayers.size(); i++) {
+                            parkLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+
+
+            final ToggleButton benches_Button = findViewById(R.id.toggle_benches_Button);
+            final ToggleButton toggle_dog_areas_Button = findViewById(R.id.toggle_dog_areas_Button);
+            final ToggleButton toggle_fountains_Button = findViewById(R.id.toggle_fountains_Button);
+            final ToggleButton toggle_playgrounds_Button = findViewById(R.id.toggle_playgrounds_Button);
+            final ToggleButton toggle_sports_fields_Button = findViewById(R.id.toggle_sports_fields_Button);
+            final ToggleButton toggle_washrooms_Button = findViewById(R.id.toggle_washrooms_Button);
+
+            benches_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < benchLayers.size(); i++) {
+                            benchLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < benchLayers.size(); i++) {
+                            benchLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+            toggle_dog_areas_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < dogareaLayers.size(); i++) {
+                            dogareaLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < dogareaLayers.size(); i++) {
+                            dogareaLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+            toggle_fountains_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < fountainLayers.size(); i++) {
+                            fountainLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < fountainLayers.size(); i++) {
+                            fountainLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+            toggle_playgrounds_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < playgroundLayers.size(); i++) {
+                            playgroundLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < playgroundLayers.size(); i++) {
+                            playgroundLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+            toggle_sports_fields_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < sportsfieldLayers.size(); i++) {
+                            sportsfieldLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < sportsfieldLayers.size(); i++) {
+                            sportsfieldLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
+            toggle_washrooms_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        for (int i = 0; i < washroomLayers.size(); i++) {
+                            washroomLayers.get(i).addLayerToMap();
+                        }
+                    } else {
+                        for (int i = 0; i < washroomLayers.size(); i++) {
+                            washroomLayers.get(i).removeLayerFromMap();
+                        }
+                    }
+                }
+            });
 
 //            JSONArray jsonWashrooms = Washrooms.getJSONArray("features");
 //
@@ -132,7 +253,27 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
                 pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                 pointStyle.setTitle(type);
-                layer.addLayerToMap();
+                //layer.addLayerToMap();
+                switch (type) {
+                    case "WASHROOMS":
+                        washroomLayers.add(layer);
+                        break;
+                    case "BENCHES":
+                        benchLayers.add(layer);
+                        break;
+                    case "OFFLEASH_DOG_AREAS":
+                        dogareaLayers.add(layer);
+                        break;
+                    case "DRINKING_FOUNTAINS":
+                        fountainLayers.add(layer);
+                        break;
+                    case "PLAYGROUNDS":
+                        playgroundLayers.add(layer);
+                        break;
+                    case "SPORTS_FIELDS":
+                        sportsfieldLayers.add(layer);
+                        break;
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

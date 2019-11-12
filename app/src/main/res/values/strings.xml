@@ -3,6 +3,22 @@
     <string name="view_map">View Map</string>
     <string name="title_activity_all_parks_map">AllParksMapsActivity</string>
     <string name="title_activity_all_parks_maps">Map</string>
+    <string name="toggle_benches">Toggle Benches</string>
+    <string name="back_button"><![CDATA[< BACK]]></string>
+    <string name="park_toggle_off">Show Parks</string>
+    <string name="park_toggle_on">Hide Parks</string>
+    <string name="bench_toggle_off">Show Benches</string>
+    <string name="bench_toggle_on">Hide Benches</string>
+    <string name="dog_area_toggle_off">Show Dog Areas</string>
+    <string name="dog_area_toggle_on">Hide Dog Areas</string>
+    <string name="fountain_toggle_off">Show Fountains</string>
+    <string name="fountain_toggle_on">Hide Fountains</string>
+    <string name="playground_toggle_off">Show Playgrounds</string>
+    <string name="playground_toggle_on">Hide Playgrounds</string>
+    <string name="sports_fields_toggle_off">Show Sports Fields</string>
+    <string name="sports_fields_toggle_on">Hide Sports Fields</string>
+    <string name="washrooms_toggle_off">Show Washrooms</string>
+    <string name="washrooms_toggle_on">Hide Washrooms</string>
     <string-array name="JsonFiles">
         <item>PARKS.json</item>
         <item>PLAYGROUNDS.json</item>
