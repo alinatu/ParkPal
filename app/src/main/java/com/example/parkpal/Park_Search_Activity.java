@@ -1,18 +1,20 @@
 package com.example.parkpal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.parkpal.ui.main.MainFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class Park_Search_Activity extends AppCompatActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
@@ -35,41 +37,21 @@ public class MainActivity extends AppCompatActivity {
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/parks/PARKS.json";
     private ArrayList<JSONObject> parkList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_fragment);
+        setContentView(R.layout.activity_park_search_);
 
-        String mapKey = readFile();
-
-        final Button park_btn = findViewById(R.id.park_btn);
-        park_btn.setOnClickListener(new View.OnClickListener() {
+        final Button back_Button = findViewById(R.id.back_Button);
+        back_Button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                onMapButtonClick();
-            }
-        });
-
-        final Button park_search_btn = findViewById(R.id.park_search_btn);
-        park_search_btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onMapSearchButtonClick();
+                finish();
             }
         });
 
         parkList = new ArrayList<JSONObject>();
         lv = findViewById(R.id.park_list);
         new GetContacts().execute();
-    }
-
-    public void onMapButtonClick() {
-        Intent i = new Intent(this, AllParksMapsActivity.class);
-        startActivity(i);
-    }
-
-    public void onMapSearchButtonClick() {
-        Intent i = new Intent(this, Park_Search_Activity.class);
-        startActivity(i);
     }
 
     /**
@@ -81,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog = new ProgressDialog(Park_Search_Activity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -149,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            ParkListAdapter adapter = new ParkListAdapter(MainActivity.this, parkList);
+            ParkListAdapter adapter = new ParkListAdapter(Park_Search_Activity.this, parkList);
 
             // Attach the adapter to a ListView
             lv.setAdapter(adapter);
@@ -177,4 +159,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return myData;
     }
+
 }
