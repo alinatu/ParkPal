@@ -12,11 +12,12 @@
         android:id="@+id/back_Button"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:fontFamily="@font/hammersmith_one"
         android:text="@string/back_button"
         app:layout_constraintBottom_toTopOf="@id/park_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/park_list"
