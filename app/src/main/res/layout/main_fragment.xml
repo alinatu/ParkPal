@@ -4,38 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#11AAB4B6"
+    android:forceDarkAllowed="true"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/park_btn"
-        android:text="@string/view_all_on_map"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@id/park_search_btn"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/fontColor"
+        android:fontFamily="@font/hammersmith_one"
+        android:text="@string/view_all_on_map"
+        app:layout_constraintBottom_toTopOf="@+id/park_search_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <Button
+        android:id="@+id/park_search_btn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="88dp"
+        android:backgroundTint="@color/fontColor"
+        android:fontFamily="@font/hammersmith_one"
+        android:text="@string/search_for_parks"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/header"
+        android:layout_width="205dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="56dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/hammersmith_one"
+        android:inputType="textPersonName"
+        android:text="@string/header"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/fontColor"
+        android:textColorHighlight="#FFEB3B"
+        android:textColorHint="#00FFFFFF"
+        android:textSize="42sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/park_search_btn"
-        android:text="@string/search_for_parks"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@id/park_list"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="140dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="77dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/park_btn" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.252"
+        app:srcCompat="@drawable/grandparent_on_bench" />
 
-    <ListView
-        android:id="@+id/park_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/park_btn"
+        app:layout_constraintEnd_toStartOf="@+id/header"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/park_search_btn" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08"
+        app:srcCompat="@drawable/happydog" />
+
+    <TextView
+        android:id="@+id/appDescription"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/hammersmith_one"
+        android:text="@string/app_description"
+        android:textAlignment="center"
+        android:textColor="@color/fontColor"
+        android:textColorHighlight="#FFEB3B"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="169dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/appDescription"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/old_couple_park" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

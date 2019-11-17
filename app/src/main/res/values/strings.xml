@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">ParkPal</string>
+    <string name="header">Park Pal</string>
+    <string name="app_description">New Westminster\'s Park Companion</string>
     <string name="view_all_on_map">View All Park Features on Map</string>
     <string name="title_activity_all_parks_map">AllParksMapsActivity</string>
     <string name="title_activity_all_parks_maps">Map</string>
