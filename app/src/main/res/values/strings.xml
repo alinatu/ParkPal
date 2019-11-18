@@ -32,4 +32,12 @@
         <item>BENCHES.json</item>
     </string-array>
     <string name="title_activity_park__search_">Park_Search_Activity</string>
+    <string name="enter_park_name">Enter park name (optional)</string>
+    <string name="park_search_label">Park Name:</string>
+    <string name="bench_search_label">Benches</string>
+    <string name="fountain_search_label">Fountains</string>
+    <string name="dog_area_search_label">Offleash dog area</string>
+    <string name="playground_search_label">Playground</string>
+    <string name="sports_field_search_label">Sports Field</string>
+    <string name="washrooms_search_label">Washrooms</string>
 </resources>

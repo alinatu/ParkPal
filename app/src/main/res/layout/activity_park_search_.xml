@@ -12,6 +12,139 @@
         android:layout_height="wrap_content"
         android:text="@string/back_button"/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/park_search_label_TV"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/park_search_label"
+            android:fontFamily="@font/hammersmith_one"
+            android:layout_marginStart="10dp"/>
+
+        <EditText
+            android:id="@+id/keywordSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hammersmith_one"
+            android:inputType="textPersonName"
+            android:hint="@string/enter_park_name"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/bench_search_label_TV"
+            android:layout_width="70dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/bench_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/bench_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/dog_area_search_label_TV"
+            android:layout_width="135dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/dog_area_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/dog_area_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/fountain_search_label_TV"
+            android:layout_width="70dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/fountain_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/fountain_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/playground_label_TV"
+            android:layout_width="80dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/playground_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/playground_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/sports_field_search_label_TV"
+            android:layout_width="115dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/sports_field_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/sports_field_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/washrooms_search_label_TV"
+            android:layout_width="80dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/washrooms_search_label"
+            android:fontFamily="@font/hammersmith_one"/>
+
+        <CheckBox
+            android:id="@+id/washrooms_search_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </CheckBox>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/park_search_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/fontColor"
+        android:fontFamily="@font/hammersmith_one"
+        android:text="@string/search_for_parks" />
+
+
+
+
     <ListView
         android:id="@+id/park_list"
         android:layout_width="match_parent"
