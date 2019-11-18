@@ -2,11 +2,10 @@ package com.example.parkpal;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
+
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,7 +13,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.*;
 
@@ -65,7 +63,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
 
         // Add a marker in Sydney and move the camera
         LatLng queensPark = new LatLng(49.216230, -122.906558);
-        mMap.addMarker(new MarkerOptions().position(queensPark).title("Marker in Queen's Park"));
+//        mMap.addMarker(new MarkerOptions().position(queensPark).title("Marker in Queen's Park"));
         mMap.moveCamera(CameraUpdateFactory.zoomTo( 14.0f ));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
 
@@ -80,6 +78,9 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 JSONObject parksObj = jsonParks.getJSONObject(i);
                 GeoJsonLayer layer = new GeoJsonLayer(mMap, parksObj);
                 parkLayers.add(layer);
+                GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
+                polygonStyle.setFillColor(getColor(R.color.fillPark));
+                polygonStyle.setStrokeWidth(new Float(2));
                 layer.addLayerToMap();
             }
 
@@ -96,16 +97,22 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
 
             final ToggleButton parks_Toggle_Button = findViewById(R.id.parks_Toggle_Button);
             parks_Toggle_Button.setChecked(true);
-
+            parks_Toggle_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
             parks_Toggle_Button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < parkLayers.size(); i++) {
-                            parkLayers.get(i).addLayerToMap();
+//                            parkLayers.get(i).addLayerToMap();
+                            GeoJsonPolygonStyle polygonStyle = parkLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(true);
+                            parks_Toggle_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < parkLayers.size(); i++) {
-                            parkLayers.get(i).removeLayerFromMap();
+//                            parkLayers.get(i).removeLayerFromMap();
+                            GeoJsonPolygonStyle polygonStyle = parkLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(false);
+                            parks_Toggle_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -123,11 +130,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < benchLayers.size(); i++) {
-                            benchLayers.get(i).addLayerToMap();
+                            GeoJsonPointStyle style = benchLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(true);
+                            benches_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < benchLayers.size(); i++) {
-                            benchLayers.get(i).removeLayerFromMap();
+                            GeoJsonPointStyle style = benchLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(false);
+                            benches_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -136,11 +147,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-                            dogareaLayers.get(i).addLayerToMap();
+                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(true);
+                            toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-                            dogareaLayers.get(i).removeLayerFromMap();
+                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(false);
+                            toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -149,11 +164,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < fountainLayers.size(); i++) {
-                            fountainLayers.get(i).addLayerToMap();
+                            GeoJsonPointStyle style = fountainLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(true);
+                            toggle_fountains_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < fountainLayers.size(); i++) {
-                            fountainLayers.get(i).removeLayerFromMap();
+                            GeoJsonPointStyle style = fountainLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(false);
+                            toggle_fountains_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -162,11 +181,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < playgroundLayers.size(); i++) {
-                            playgroundLayers.get(i).addLayerToMap();
+                            GeoJsonPointStyle style = playgroundLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(true);
+                            toggle_playgrounds_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < playgroundLayers.size(); i++) {
-                            playgroundLayers.get(i).removeLayerFromMap();
+                            GeoJsonPointStyle style = playgroundLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(false);
+                            toggle_playgrounds_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -175,11 +198,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < sportsfieldLayers.size(); i++) {
-                            sportsfieldLayers.get(i).addLayerToMap();
+                            GeoJsonPointStyle style = sportsfieldLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(true);
+                            toggle_sports_fields_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < sportsfieldLayers.size(); i++) {
-                            sportsfieldLayers.get(i).removeLayerFromMap();
+                            GeoJsonPointStyle style = sportsfieldLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(false);
+                            toggle_sports_fields_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
@@ -188,25 +215,19 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < washroomLayers.size(); i++) {
-                            washroomLayers.get(i).addLayerToMap();
+                            GeoJsonPointStyle style = washroomLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(true);
+                            toggle_washrooms_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < washroomLayers.size(); i++) {
-                            washroomLayers.get(i).removeLayerFromMap();
+                            GeoJsonPointStyle style = washroomLayers.get(i).getDefaultPointStyle();
+                            style.setVisible(false);
+                            toggle_washrooms_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
                 }
             });
-
-//            JSONArray jsonWashrooms = Washrooms.getJSONArray("features");
-//
-//            for (int i = 0; i < jsonWashrooms.length(); i++) {
-//                JSONObject WashroomsObj = jsonWashrooms.getJSONObject(i);
-//                GeoJsonLayer shapeJSON = new GeoJsonLayer(mMap, WashroomsObj);
-//                GeoJsonPointStyle WashroomStyle = shapeJSON.getDefaultPointStyle();
-//                WashroomStyle.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.washroom));
-//                shapeJSON.addLayerToMap();
-//            }
         } catch (JSONException e) {
             Log.e("Reading JSON to Array", "File not found: " + e.toString());
         }
@@ -216,39 +237,17 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         try {
             JSONObject JObj = new JSONObject(JsonString);
             JSONArray JArray = JObj.getJSONArray("features");
-            BitmapDrawable bitmapDraw = null;
             String type = JObj.getString("name");
-
-            switch (type) {
-                case "WASHROOMS":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.washroom);
-                    break;
-                case "BENCHES":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.bench);
-                    break;
-                case "OFFLEASH_DOG_AREAS":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.dog_leash);
-                    break;
-                case "DRINKING_FOUNTAINS":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.drinking_fountains);
-                    break;
-                case "PLAYGROUNDS":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.playground);
-                    break;
-                case "SPORTS_FIELDS":
-                    bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.sport_field);
-                    break;
-            }
-            Bitmap b = bitmapDraw.getBitmap();
-            Bitmap smallMarker = Bitmap.createScaledBitmap(b, 60, 60, false);
-
+            Bitmap Marker = findMarkerForPoint(type);
             for (int i = 0; i < JArray.length(); i++) {
                 JSONObject Obj = JArray.getJSONObject(i);
                 GeoJsonLayer layer = new GeoJsonLayer(mMap, Obj);
                 GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
-                pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(Marker));
                 pointStyle.setTitle(type);
-                //shapeJSON.addLayerToMap();
+//                shapeJSON.addLayerToMap();
+                pointStyle.setVisible(false);
+                layer.addLayerToMap();
                 switch (type) {
                     case "WASHROOMS":
                         washroomLayers.add(layer);
@@ -258,6 +257,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         break;
                     case "OFFLEASH_DOG_AREAS":
                         dogareaLayers.add(layer);
+                        layer.removeLayerFromMap();
                         break;
                     case "DRINKING_FOUNTAINS":
                         fountainLayers.add(layer);
@@ -273,5 +273,35 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public Bitmap findMarkerForPoint(String type) {
+        BitmapDrawable bitmapDraw = null;
+        switch (type) {
+            case "WASHROOMS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.washroom);
+                break;
+            case "BENCHES":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.bench);
+                break;
+            case "OFFLEASH_DOG_AREAS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.dog_leash);
+                break;
+            case "DRINKING_FOUNTAINS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.drinking_fountains);
+                break;
+            case "PLAYGROUNDS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.playground);
+                break;
+            case "SPORTS_FIELDS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.sport_field);
+                break;
+        }
+
+        //resize the icon
+        Bitmap b = bitmapDraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 60, 60, false);
+
+        return smallMarker;
     }
 }

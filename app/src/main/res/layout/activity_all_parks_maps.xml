@@ -1,115 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AllParksMapsActivity" >
+    android:layout_width="match_parent" >
 
-    <Button
-        android:id="@+id/back_Button"
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AllParksMapsActivity">
+
+        <Button
+            android:id="@+id/back_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/back_button" />
+    </fragment>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start|top"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/back_button" />
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:layout_alignBottom="@id/map">
 
-    <ToggleButton
-        android:id="@+id/parks_Toggle_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/park_toggle_off"
-        android:textOn="@string/park_toggle_on" />
+        <ToggleButton
+            android:id="@+id/parks_Toggle_Button"
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_park_bench"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:layout_gravity="center"/>
 
-    <ToggleButton
-        android:id="@+id/toggle_benches_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/bench_toggle_off"
-        android:textOn="@string/bench_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_benches_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_bench"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center" />
 
-    <ToggleButton
-        android:id="@+id/toggle_dog_areas_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/dog_area_toggle_off"
-        android:textOn="@string/dog_area_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_dog_areas_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_dog_leash"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center" />
 
-    <ToggleButton
-        android:id="@+id/toggle_fountains_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="140dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/fountain_toggle_off"
-        android:textOn="@string/fountain_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_fountains_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_drinking_fountain"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center"  />
 
-    <ToggleButton
-        android:id="@+id/toggle_playgrounds_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="180dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/playground_toggle_off"
-        android:textOn="@string/playground_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_playgrounds_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_playground"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center" />
 
-    <ToggleButton
-        android:id="@+id/toggle_sports_fields_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="220dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/sports_fields_toggle_off"
-        android:textOn="@string/sports_fields_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_sports_fields_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_sport"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center" />
 
-    <ToggleButton
-        android:id="@+id/toggle_washrooms_Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="260dp"
-        android:fontFamily="@font/hammersmith_one"
-        android:padding="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textOff="@string/washrooms_toggle_off"
-        android:textOn="@string/washrooms_toggle_on" />
+        <ToggleButton
+            android:id="@+id/toggle_washrooms_Button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_washroom"
+            android:background="@color/toggleButtonBackground"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center" />
+    </LinearLayout>
 
-</fragment>
+</RelativeLayout>
