@@ -2,17 +2,16 @@ package com.example.parkpal;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -21,17 +20,13 @@ import com.google.maps.android.geojson.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-//import org.json.simple.parser.JSONParser;
 import org.json.JSONArray;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
-
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class AllParksMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -207,10 +202,10 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
 //
 //            for (int i = 0; i < jsonWashrooms.length(); i++) {
 //                JSONObject WashroomsObj = jsonWashrooms.getJSONObject(i);
-//                GeoJsonLayer layer = new GeoJsonLayer(mMap, WashroomsObj);
-//                GeoJsonPointStyle WashroomStyle = layer.getDefaultPointStyle();
+//                GeoJsonLayer shapeJSON = new GeoJsonLayer(mMap, WashroomsObj);
+//                GeoJsonPointStyle WashroomStyle = shapeJSON.getDefaultPointStyle();
 //                WashroomStyle.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.washroom));
-//                layer.addLayerToMap();
+//                shapeJSON.addLayerToMap();
 //            }
         } catch (JSONException e) {
             Log.e("Reading JSON to Array", "File not found: " + e.toString());
@@ -253,7 +248,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
                 pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                 pointStyle.setTitle(type);
-                //layer.addLayerToMap();
+                //shapeJSON.addLayerToMap();
                 switch (type) {
                     case "WASHROOMS":
                         washroomLayers.add(layer);

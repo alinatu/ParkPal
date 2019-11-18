@@ -1,14 +1,24 @@
 package com.example.parkpal;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.model.Polygon;
+//import com.google.android.gms.maps.model.PolygonOptions;
+//import com.google.android.gms.maps.model.PolygonOptions;
+//import com.google.maps.android.geojson.GeoJsonFeature;
+//import com.google.maps.android.geojson.GeoJsonLayer;
+//import com.google.maps.android.geojson.GeoJsonPolygon;
+import com.google.maps.android.geojson.*;
+import com.google.maps.android.geojson.GeoJsonLayer;
+import com.google.maps.android.PolyUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
@@ -36,6 +46,8 @@ public class Park_Search_Activity extends AppCompatActivity {
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/parks/PARKS.json";
     private ArrayList<JSONObject> parkList;
+    private ArrayList<Park> parkObjectList;
+    protected GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,7 @@ public class Park_Search_Activity extends AppCompatActivity {
         });
 
         parkList = new ArrayList<JSONObject>();
+        parkObjectList = new ArrayList<Park>();
         lv = findViewById(R.id.park_list);
         new GetContacts().execute();
     }
@@ -76,6 +89,7 @@ public class Park_Search_Activity extends AppCompatActivity {
             // Making a request to url and getting response
             String[] jsonStr = sh.loadJSONFromAsset(getApplicationContext());
             //jsonStr = sh.makeServiceCall(SERVICE_URL);
+            ArrayList<String> uniqueParks = new ArrayList<String>();
 
             if (jsonStr != null) {
                 try {
@@ -83,15 +97,51 @@ public class Park_Search_Activity extends AppCompatActivity {
 
                     // Getting JSON Array node
                     JSONArray jsonParks = jsonObj.getJSONArray("features");
+                    Park park = null;
 
-                    // looping through All Contacts
+//                    PolygonOptions polygonOptions = new PolygonOptions();
+//                    polygonOptions.strokeColor(Color.RED);
+//                    polygonOptions.fillColor(Color.BLUE);
+                    GeoJsonPolygon polygon;
+
+                    // looping through All Parks
                     for (int i = 0; i < jsonParks.length(); i++) {
-                        JSONObject c = jsonParks.getJSONObject(i);
-                        // This will not add parks with no-name into our list.
-                        if (!c.getJSONObject("properties").get("Name").equals(null)) {
-                            parkList.add(c);
+                        JSONObject parksObj = jsonParks.getJSONObject(i);
+                        String name = parksObj.getJSONObject("properties").get("Name").toString();
+                        System.out.println(name);
+                        GeoJsonLayer layer = new GeoJsonLayer(map, parksObj);
+                        Iterable<GeoJsonFeature> features = layer.getFeatures();
+                        if (!name.equals("null") && !name.isEmpty()) {
+                            if (!uniqueParks.contains(name)) {
+                                uniqueParks.add(name);
+                                park = new Park(name, parksObj);
+                                for (GeoJsonFeature feature: features) {
+                                    polygon = null;
+                                    if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
+                                        polygon = (GeoJsonPolygon)feature.getGeometry();
+                                        park.addPolygon(polygon);
+                                    }
+                                }
+                                parkList.add(parksObj);
+                                parkObjectList.add(park);
+                            } else {
+                                // add sub-park elements to parkList element
+                                for (int j = 0; j < parkObjectList.size(); j++)
+                                if (parkObjectList.get(j).getName().equals(name)) {
+                                    for (GeoJsonFeature feature: features) {
+                                        polygon = null;
+                                        if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
+                                            polygon = (GeoJsonPolygon)feature.getGeometry();
+                                            parkObjectList.get(j).addPolygon(polygon);
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
                         }
-
+                    }
+                    for (int i = 1; i < jsonStr.length; i++) {
+                        loadParkData(jsonStr[i]);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -131,17 +181,17 @@ public class Park_Search_Activity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            ParkListAdapter adapter = new ParkListAdapter(Park_Search_Activity.this, parkList);
+            ParkListAdapter adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
 
             // Attach the adapter to a ListView
             lv.setAdapter(adapter);
         }
 
     }
-    private String readFile()
-    {
+
+    private String readFile() {
         String myData = "";
-        File myExternalFile = new File(".","log.txt");
+        File myExternalFile = new File(".", "log.txt");
         try {
             FileInputStream fis = new FileInputStream(myExternalFile);
             DataInputStream in = new DataInputStream(fis);
@@ -160,4 +210,61 @@ public class Park_Search_Activity extends AppCompatActivity {
         return myData;
     }
 
+    public void loadParkData(String JsonString) {
+        try {
+            JSONObject jsonObject = new JSONObject(JsonString);
+            JSONArray featuresArray = jsonObject.getJSONArray("features");
+            GeoJsonPoint point;
+            String type = jsonObject.getString("name");
+            for (int i = 0; i < featuresArray.length(); i++) {
+                JSONObject parksObj = featuresArray.getJSONObject(i);
+                GeoJsonLayer layer = new GeoJsonLayer(map, parksObj);
+                Iterable<GeoJsonFeature> features = layer.getFeatures();
+                for (GeoJsonFeature feature: features) {
+                    point = null;
+                    System.out.println(feature.getGeometry().getType());
+                    if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Point")) {
+                        point = (GeoJsonPoint)feature.getGeometry();
+                        LatLng latlng = point.getCoordinates();
+                        java.util.List<LatLng> latLngPoly = null;
+
+                        for (Park park: parkObjectList) {
+                            for (GeoJsonPolygon parkPoly: park.getPolygons()) {
+                                for (int k = 0; k < parkPoly.getCoordinates().size(); k++) {
+                                    latLngPoly = parkPoly.getCoordinates().get(k);
+                                }
+                                latLngPoly = parkPoly.getCoordinates().get(0);
+                                if (PolyUtil.containsLocation(latlng, latLngPoly, true)) {
+                                    switch (type) {
+                                        case "WASHROOMS":
+                                            park.addWashroom(point);
+                                            break;
+                                        case "BENCHES":
+                                            park.addBench(point);
+                                            break;
+                                        case "OFFLEASH_DOG_AREAS":
+                                            park.addDogArea(point);
+                                            break;
+                                        case "DRINKING_FOUNTAINS":
+                                            park.addFountain(point);
+                                            break;
+                                        case "PLAYGROUNDS":
+                                            park.addPlayground(point);
+                                            break;
+                                        case "SPORTS_FIELDS":
+                                            park.addSportsField(point);
+                                            break;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
