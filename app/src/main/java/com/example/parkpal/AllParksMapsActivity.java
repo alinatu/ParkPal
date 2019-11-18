@@ -147,14 +147,18 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
-                            polygonStyle.setVisible(true);
+//                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+//                            polygonStyle.setVisible(true);
+                            GeoJsonPointStyle pointStyle = dogareaLayers.get(i).getDefaultPointStyle();
+                            pointStyle.setVisible(true);
                             toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
                         }
                     } else {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
-                            polygonStyle.setVisible(false);
+//                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+//                            polygonStyle.setVisible(false);
+                            GeoJsonPointStyle pointStyle = dogareaLayers.get(i).getDefaultPointStyle();
+                            pointStyle.setVisible(false);
                             toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
                         }
                     }
@@ -246,7 +250,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(Marker));
                 pointStyle.setTitle(type);
 //                shapeJSON.addLayerToMap();
-                pointStyle.setVisible(false);
+//                pointStyle.setVisible(false);
                 layer.addLayerToMap();
                 switch (type) {
                     case "WASHROOMS":
@@ -257,7 +261,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         break;
                     case "OFFLEASH_DOG_AREAS":
                         dogareaLayers.add(layer);
-                        layer.removeLayerFromMap();
+//                        layer.removeLayerFromMap();
                         break;
                     case "DRINKING_FOUNTAINS":
                         fountainLayers.add(layer);
@@ -277,12 +281,14 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
 
     public Bitmap findMarkerForPoint(String type) {
         BitmapDrawable bitmapDraw = null;
+        int size = 60;
         switch (type) {
             case "WASHROOMS":
                 bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.washroom);
                 break;
             case "BENCHES":
                 bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.bench);
+                size = 50;
                 break;
             case "OFFLEASH_DOG_AREAS":
                 bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.dog_leash);
@@ -300,7 +306,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
 
         //resize the icon
         Bitmap b = bitmapDraw.getBitmap();
-        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 60, 60, false);
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, size, size, false);
 
         return smallMarker;
     }
