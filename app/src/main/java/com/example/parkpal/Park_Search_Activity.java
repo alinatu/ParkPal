@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.maps.android.geojson.*;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.PolyUtil;
@@ -34,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Park_Search_Activity extends AppCompatActivity {
 
@@ -112,10 +114,10 @@ public class Park_Search_Activity extends AppCompatActivity {
                             if (!uniqueParks.contains(name)) {
                                 uniqueParks.add(name);
                                 park = new Park(name, parksObj);
-                                for (GeoJsonFeature feature: features) {
+                                for (GeoJsonFeature feature : features) {
                                     polygon = null;
                                     if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
-                                        polygon = (GeoJsonPolygon)feature.getGeometry();
+                                        polygon = (GeoJsonPolygon) feature.getGeometry();
                                         park.addPolygon(polygon);
                                     }
                                 }
@@ -124,16 +126,16 @@ public class Park_Search_Activity extends AppCompatActivity {
                             } else {
                                 // add sub-park elements to parkList element
                                 for (int j = 0; j < parkObjectList.size(); j++)
-                                if (parkObjectList.get(j).getName().equals(name)) {
-                                    for (GeoJsonFeature feature: features) {
-                                        polygon = null;
-                                        if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
-                                            polygon = (GeoJsonPolygon)feature.getGeometry();
-                                            parkObjectList.get(j).addPolygon(polygon);
+                                    if (parkObjectList.get(j).getName().equals(name)) {
+                                        for (GeoJsonFeature feature : features) {
+                                            polygon = null;
+                                            if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
+                                                polygon = (GeoJsonPolygon) feature.getGeometry();
+                                                parkObjectList.get(j).addPolygon(polygon);
+                                            }
                                         }
+                                        break;
                                     }
-                                    break;
-                                }
                             }
                         }
                     }
@@ -184,7 +186,7 @@ public class Park_Search_Activity extends AppCompatActivity {
             keywordSearchEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    System.out.println("Text ["+s+"]");
+                    System.out.println("Text [" + s + "]");
 
                     adapter.getFilter().filter(s.toString());
                     //lv.setAdapter(adapter);
@@ -234,20 +236,29 @@ public class Park_Search_Activity extends AppCompatActivity {
                 JSONObject parksObj = featuresArray.getJSONObject(i);
                 GeoJsonLayer layer = new GeoJsonLayer(map, parksObj);
                 Iterable<GeoJsonFeature> features = layer.getFeatures();
-                for (GeoJsonFeature feature: features) {
+                LatLng latlng = null;
+                for (GeoJsonFeature feature : features) {
                     point = null;
                     System.out.println(feature.getGeometry().getType());
                     if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Point")) {
-                        point = (GeoJsonPoint)feature.getGeometry();
-                        LatLng latlng = point.getCoordinates();
-                        java.util.List<LatLng> latLngPoly = null;
-
-                        for (Park park: parkObjectList) {
-                            for (GeoJsonPolygon parkPoly: park.getPolygons()) {
-                                for (int k = 0; k < parkPoly.getCoordinates().size(); k++) {
-                                    latLngPoly = parkPoly.getCoordinates().get(k);
-                                }
-                                latLngPoly = parkPoly.getCoordinates().get(0);
+                        point = (GeoJsonPoint) feature.getGeometry();
+                        latlng = point.getCoordinates();
+                    } else if (feature.getGeometry() != null && feature.getGeometry().getType().equals("MultiPolygon")) {
+                        GeoJsonMultiPolygon multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
+                        List<GeoJsonPolygon> polygons = multiPolygon.getPolygons();
+                        for (GeoJsonPolygon polygon : polygons) {
+                            latlng = findCenterOfPolygon(polygon);
+                        }
+                    } else if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
+                        GeoJsonPolygon polygon = (GeoJsonPolygon)feature.getGeometry();
+                        latlng = findCenterOfPolygon(polygon);
+                    }
+                        for (Park park : parkObjectList) {
+                            for (GeoJsonPolygon parkPoly : park.getPolygons()) {
+//                                for (int k = 0; k < parkPoly.getCoordinates().size(); k++) {
+//                                    latLngPoly = parkPoly.getCoordinates().get(k);
+//                                }
+                                java.util.List<LatLng> latLngPoly = parkPoly.getCoordinates().get(0);
                                 if (PolyUtil.containsLocation(latlng, latLngPoly, true)) {
                                     switch (type) {
                                         case "WASHROOMS":
@@ -275,10 +286,20 @@ public class Park_Search_Activity extends AppCompatActivity {
                         }
                     }
                 }
+            } catch(JSONException e){
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+
         }
 
+    public LatLng findCenterOfPolygon(GeoJsonPolygon polygon) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        List<? extends List<LatLng>> polygonPoints = polygon.getCoordinates();
+        for (List<LatLng> latLngs : polygonPoints) {
+            for (LatLng latLng : latLngs) {
+                builder.include(latLng);
+            }
+        }
+        return builder.build().getCenter();
     }
-}
+    }

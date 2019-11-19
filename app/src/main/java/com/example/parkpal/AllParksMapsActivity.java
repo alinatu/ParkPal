@@ -290,6 +290,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         polygonStyle.setVisible(false);
                         polygonStyle.setFillColor(getColor(R.color.fillDogArea));
                         polygonStyle.setStrokeWidth(2);
+                        polygonStyle.setZIndex(99);
                         dogareaLayers.add(layer);
                         break;
                     case "DRINKING_FOUNTAINS":
@@ -309,7 +310,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         }
     }
 
-    public Marker AddMarkerToCenterOfPolygon(GeoJsonPolygon polygon, Bitmap Marker, String title) {
+    public LatLng findCenterOfPolygon(GeoJsonPolygon polygon) {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         List<? extends List<LatLng>> polygonPoints = polygon.getCoordinates();
         for (List<LatLng> latLngs : polygonPoints) {
@@ -317,7 +318,12 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 builder.include(latLng);
             }
         }
-        MarkerOptions markerOptions = new MarkerOptions().position(builder.build().getCenter())
+        return builder.build().getCenter();
+    }
+
+    public Marker AddMarkerToCenterOfPolygon(GeoJsonPolygon polygon, Bitmap Marker, String title) {
+
+        MarkerOptions markerOptions = new MarkerOptions().position(findCenterOfPolygon(polygon))
                 .draggable(false)
                 .flat(true)
                 .icon(BitmapDescriptorFactory.fromBitmap(Marker))
