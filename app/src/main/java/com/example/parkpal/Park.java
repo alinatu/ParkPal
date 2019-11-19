@@ -31,6 +31,12 @@ public class Park {
     }
     public String getName() {return name;}
     public ArrayList<GeoJsonPolygon> getPolygons() {return polygons;}
+    public ArrayList<GeoJsonPoint> getBenches() {return benches;}
+    public ArrayList<GeoJsonPoint> getDogAreas() {return dogAreas;}
+    public ArrayList<GeoJsonPoint> getFountains() {return fountains;}
+    public ArrayList<GeoJsonPoint> getPlaygrounds() {return playgrounds;}
+    public ArrayList<GeoJsonPoint> getSportsFields() {return sportsFields;}
+    public ArrayList<GeoJsonPoint> getWashrooms() {return washrooms;}
     public void addPolygon(GeoJsonPolygon polygon) {polygons.add(polygon);}
     public void addBench(GeoJsonPoint bench) {benches.add(bench);}
     public void addDogArea(GeoJsonPoint dogArea) {dogAreas.add(dogArea);}

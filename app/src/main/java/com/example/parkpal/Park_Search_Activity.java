@@ -2,6 +2,7 @@ package com.example.parkpal;
 
 import android.app.ProgressDialog;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,7 +48,7 @@ public class Park_Search_Activity extends AppCompatActivity {
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/parks/PARKS.json";
     private ArrayList<JSONObject> parkList;
-    private ArrayList<Park> parkObjectList;
+    static ArrayList<Park> parkObjectList;
     protected GoogleMap map;
 
     @Override
@@ -97,10 +99,6 @@ public class Park_Search_Activity extends AppCompatActivity {
                     // Getting JSON Array node
                     JSONArray jsonParks = jsonObj.getJSONArray("features");
                     Park park = null;
-
-//                    PolygonOptions polygonOptions = new PolygonOptions();
-//                    polygonOptions.strokeColor(Color.RED);
-//                    polygonOptions.fillColor(Color.BLUE);
                     GeoJsonPolygon polygon;
 
                     // looping through All Parks
@@ -183,6 +181,18 @@ public class Park_Search_Activity extends AppCompatActivity {
             lv.setAdapter(adapter);
 
             final EditText keywordSearchEditText = findViewById(R.id.keywordSearch);
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                    //Intent intent = new Intent(Park_Search_Activity.this.getApplicationContext(), SearchMapsActivity.class);
+                    Intent intent = new Intent(Park_Search_Activity.this.getApplicationContext(), AllParksMapsActivity.class);
+                    //intent.putExtra("ParkList", parkObjectList);
+                    intent.putExtra("position", position);
+                    startActivity(intent);
+                }
+            });
+
             keywordSearchEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -239,7 +249,7 @@ public class Park_Search_Activity extends AppCompatActivity {
                 LatLng latlng = null;
                 for (GeoJsonFeature feature : features) {
                     point = null;
-                    System.out.println(feature.getGeometry().getType());
+                    //System.out.println(feature.getGeometry().getType());
                     if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Point")) {
                         point = (GeoJsonPoint) feature.getGeometry();
                         latlng = point.getCoordinates();

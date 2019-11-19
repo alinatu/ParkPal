@@ -48,10 +48,19 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
     ArrayList<GeoJsonLayer> sportsfieldLayers = new ArrayList<GeoJsonLayer>();
     ArrayList<Marker> dogareaMarkers = new ArrayList<>();
 
+    private int position;
+    Park park;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_parks_maps);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.containsKey("position")) {
+            position = bundle.getInt("position");
+            park = Park_Search_Activity.parkObjectList.get(position);
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -72,11 +81,21 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng queensPark = new LatLng(49.216230, -122.906558);
+        if (park != null) {
+            // Zoom to the map
+            final int POLYGON_PADDING_PREFERENCE = 200;
+            List<LatLng> polygon = park.getPolygons().get(0).getCoordinates().get(0);
+            final LatLngBounds latLngBounds = getPolygonLatLngBounds(polygon);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, POLYGON_PADDING_PREFERENCE));
+        } else {
+            // Add a marker in New West and move the camera
+            LatLng queensPark = new LatLng(49.216230, -122.906558);
 //        mMap.addMarker(new MarkerOptions().position(queensPark).title("Marker in Queen's Park"));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
+        }
+
+
 
         HttpHandler sh = new HttpHandler();
         String[] jsonString = sh.loadJSONFromAsset(getApplicationContext());
@@ -128,7 +147,6 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                     }
                 }
             });
-
 
             final ToggleButton benches_Button = findViewById(R.id.toggle_benches_Button);
             final ToggleButton toggle_dog_areas_Button = findViewById(R.id.toggle_dog_areas_Button);
@@ -248,6 +266,14 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         } catch (JSONException e) {
             Log.e("Reading JSON to Array", "File not found: " + e.toString());
         }
+    }
+
+    private static LatLngBounds getPolygonLatLngBounds(final List<LatLng> polygon) {
+        final LatLngBounds.Builder centerBuilder = LatLngBounds.builder();
+        for (LatLng point : polygon) {
+            centerBuilder.include(point);
+        }
+        return centerBuilder.build();
     }
 
     public void getGeoJsonPointFromJsonFile(String JsonString) {

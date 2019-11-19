@@ -40,4 +40,5 @@
     <string name="playground_search_label">Playground</string>
     <string name="sports_field_search_label">Sports Field</string>
     <string name="washrooms_search_label">Washrooms</string>
+    <string name="title_activity_search_maps">Map</string>
 </resources>
