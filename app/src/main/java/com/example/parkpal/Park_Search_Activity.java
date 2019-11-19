@@ -1,28 +1,25 @@
 package com.example.parkpal;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.Polygon;
-//import com.google.android.gms.maps.model.PolygonOptions;
-//import com.google.android.gms.maps.model.PolygonOptions;
-//import com.google.maps.android.geojson.GeoJsonFeature;
-//import com.google.maps.android.geojson.GeoJsonLayer;
-//import com.google.maps.android.geojson.GeoJsonPolygon;
+
 import com.google.maps.android.geojson.*;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.PolyUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,6 +40,7 @@ public class Park_Search_Activity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
+    ParkListAdapter adapter;
     // URL to get contacts JSON
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/parks/PARKS.json";
     private ArrayList<JSONObject> parkList;
@@ -80,7 +78,6 @@ public class Park_Search_Activity extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
 
         @Override
@@ -166,12 +163,9 @@ public class Park_Search_Activity extends AppCompatActivity {
                                 .show();
                     }
                 });
-
             }
-
             return null;
         }
-
 
         @Override
         protected void onPostExecute(Void result) {
@@ -181,10 +175,30 @@ public class Park_Search_Activity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            ParkListAdapter adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
+            adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
 
             // Attach the adapter to a ListView
             lv.setAdapter(adapter);
+
+            final EditText keywordSearchEditText = findViewById(R.id.keywordSearch);
+            keywordSearchEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    System.out.println("Text ["+s+"]");
+
+                    adapter.getFilter().filter(s.toString());
+                    //lv.setAdapter(adapter);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
         }
 
     }
