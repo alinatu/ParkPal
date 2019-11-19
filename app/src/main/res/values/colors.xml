@@ -3,4 +3,9 @@
     <color name="colorPrimary">#27AE60</color>
     <color name="colorPrimaryDark">#82E0AA</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="fontColor">#62E77C</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="toggleButtonBackground">#90ffffff</color>
+    <color name="fillPark">#9FF586</color>
 </resources>
