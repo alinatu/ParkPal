@@ -8,4 +8,5 @@
     <color name="red">#FF0000</color>
     <color name="toggleButtonBackground">#90ffffff</color>
     <color name="fillPark">#9FF586</color>
+    <color name="fillDogArea">#FFC107</color>
 </resources>

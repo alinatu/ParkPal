@@ -7,24 +7,34 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.os.Bundle;
+
+import com.google.android.gms.common.Feature;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.MarkerManager;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllParksMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -36,6 +46,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
     ArrayList<GeoJsonLayer> washroomLayers = new ArrayList<GeoJsonLayer>();
     ArrayList<GeoJsonLayer> playgroundLayers = new ArrayList<GeoJsonLayer>();
     ArrayList<GeoJsonLayer> sportsfieldLayers = new ArrayList<GeoJsonLayer>();
+    ArrayList<Marker> dogareaMarkers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +75,7 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         // Add a marker in Sydney and move the camera
         LatLng queensPark = new LatLng(49.216230, -122.906558);
 //        mMap.addMarker(new MarkerOptions().position(queensPark).title("Marker in Queen's Park"));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo( 14.0f ));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
 
         HttpHandler sh = new HttpHandler();
@@ -80,11 +91,11 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 parkLayers.add(layer);
                 GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
                 polygonStyle.setFillColor(getColor(R.color.fillPark));
-                polygonStyle.setStrokeWidth(new Float(2));
+                polygonStyle.setStrokeWidth(3);
                 layer.addLayerToMap();
             }
 
-            for(int i = 1; i < jsonString.length; i++) {
+            for (int i = 1; i < jsonString.length; i++) {
                 getGeoJsonPointFromJsonFile(jsonString[i]);
             }
 
@@ -147,19 +158,21 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-//                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
-//                            polygonStyle.setVisible(true);
-                            GeoJsonPointStyle pointStyle = dogareaLayers.get(i).getDefaultPointStyle();
-                            pointStyle.setVisible(true);
+                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(true);
                             toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.red));
+                        }
+                        for (Marker marker: dogareaMarkers) {
+                            marker.setVisible(true);
                         }
                     } else {
                         for (int i = 0; i < dogareaLayers.size(); i++) {
-//                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
-//                            polygonStyle.setVisible(false);
-                            GeoJsonPointStyle pointStyle = dogareaLayers.get(i).getDefaultPointStyle();
-                            pointStyle.setVisible(false);
+                            GeoJsonPolygonStyle polygonStyle = dogareaLayers.get(i).getDefaultPolygonStyle();
+                            polygonStyle.setVisible(false);
                             toggle_dog_areas_Button.setCompoundDrawableTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.black));
+                        }
+                        for (Marker marker: dogareaMarkers) {
+                            marker.setVisible(false);
                         }
                     }
                 }
@@ -241,17 +254,15 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         try {
             JSONObject JObj = new JSONObject(JsonString);
             JSONArray JArray = JObj.getJSONArray("features");
-            String type = JObj.getString("name");
+            final String type = JObj.getString("name");
             Bitmap Marker = findMarkerForPoint(type);
             for (int i = 0; i < JArray.length(); i++) {
                 JSONObject Obj = JArray.getJSONObject(i);
-                GeoJsonLayer layer = new GeoJsonLayer(mMap, Obj);
+                final GeoJsonLayer layer = new GeoJsonLayer(mMap, Obj);
                 GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
                 pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(Marker));
                 pointStyle.setTitle(type);
-//                shapeJSON.addLayerToMap();
-//                pointStyle.setVisible(false);
-                layer.addLayerToMap();
+                pointStyle.setVisible(false);
                 switch (type) {
                     case "WASHROOMS":
                         washroomLayers.add(layer);
@@ -260,8 +271,26 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         benchLayers.add(layer);
                         break;
                     case "OFFLEASH_DOG_AREAS":
+                        GeoJsonMultiPolygon multiPolygon = null;
+                        Iterable<GeoJsonFeature> features = layer.getFeatures();
+                        for (GeoJsonFeature feature : features) {
+                            if (feature.getGeometry() != null && feature.getGeometry().getType().equals("MultiPolygon")) {
+                                multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
+                                List<GeoJsonPolygon> polygons = multiPolygon.getPolygons();
+                                for (GeoJsonPolygon polygon : polygons) {
+                                    dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, type));
+                                }
+                            } else if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")){
+                                GeoJsonPolygon polygon = (GeoJsonPolygon)feature.getGeometry();
+                                dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, type));
+                            }
+                        }
+
+                        GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
+                        polygonStyle.setVisible(false);
+                        polygonStyle.setFillColor(getColor(R.color.fillDogArea));
+                        polygonStyle.setStrokeWidth(2);
                         dogareaLayers.add(layer);
-//                        layer.removeLayerFromMap();
                         break;
                     case "DRINKING_FOUNTAINS":
                         fountainLayers.add(layer);
@@ -273,10 +302,29 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         sportsfieldLayers.add(layer);
                         break;
                 }
+                layer.addLayerToMap();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public Marker AddMarkerToCenterOfPolygon(GeoJsonPolygon polygon, Bitmap Marker, String title) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        List<? extends List<LatLng>> polygonPoints = polygon.getCoordinates();
+        for (List<LatLng> latLngs : polygonPoints) {
+            for (LatLng latLng : latLngs) {
+                builder.include(latLng);
+            }
+        }
+        MarkerOptions markerOptions = new MarkerOptions().position(builder.build().getCenter())
+                .draggable(false)
+                .flat(true)
+                .icon(BitmapDescriptorFactory.fromBitmap(Marker))
+                .visible(false)
+                .title(title);
+        Marker marker = mMap.addMarker(markerOptions);
+        return marker;
     }
 
     public Bitmap findMarkerForPoint(String type) {
