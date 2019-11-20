@@ -22,6 +22,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -51,6 +53,13 @@ public class Park_Search_Activity extends AppCompatActivity {
     private static String SERVICE_URL = "http://opendata.newwestcity.ca/downloads/parks/PARKS.json";
     private ArrayList<JSONObject> parkList;
     static ArrayList<Park> parkObjectList;
+    static ArrayList<Park> fullParkObjectList;
+    ArrayList<Park> benchParkList;
+//    ArrayList<Park> benchParkList;
+//    ArrayList<Park> benchParkList;
+//    ArrayList<Park> benchParkList;
+//    ArrayList<Park> benchParkList;
+//    ArrayList<Park> benchParkList;
     protected GoogleMap map;
 
     @Override
@@ -67,8 +76,16 @@ public class Park_Search_Activity extends AppCompatActivity {
 
         parkList = new ArrayList<JSONObject>();
         parkObjectList = new ArrayList<Park>();
+        fullParkObjectList = new ArrayList<Park>();
         lv = findViewById(R.id.park_list);
         new GetContacts().execute();
+    }
+
+
+    @Override
+    public void onResume() {
+        parkObjectList = fullParkObjectList;
+        super.onResume();
     }
 
     /**
@@ -147,6 +164,8 @@ public class Park_Search_Activity extends AppCompatActivity {
                         }
                     });
 
+                    fullParkObjectList = parkObjectList;
+
                     for (int i = 1; i < jsonStr.length; i++) {
                         loadParkData(jsonStr[i]);
                     }
@@ -221,6 +240,21 @@ public class Park_Search_Activity extends AppCompatActivity {
                 public void afterTextChanged(Editable s) {
                 }
             });
+
+            final CheckBox bench_search_checkbox = findViewById(R.id.bench_search_checkbox);
+            bench_search_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                 @Override
+                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+
+                     }
+                 }
+            );
+            final CheckBox dog_area_search_checkbox = findViewById(R.id.dog_area_search_checkbox);
+            final CheckBox fountain_search_checkbox = findViewById(R.id.fountain_search_checkbox);
+            final CheckBox playground_search_checkbox = findViewById(R.id.playground_search_checkbox);
+            final CheckBox sports_field_search_checkbox = findViewById(R.id.sports_field_search_checkbox);
+            final CheckBox washrooms_search_checkbox = findViewById(R.id.washrooms_search_checkbox);
+
         }
 
     }
@@ -306,7 +340,6 @@ public class Park_Search_Activity extends AppCompatActivity {
             } catch(JSONException e){
                 e.printStackTrace();
             }
-
         }
 
     public LatLng findCenterOfPolygon(GeoJsonPolygon polygon) {
@@ -319,4 +352,4 @@ public class Park_Search_Activity extends AppCompatActivity {
         }
         return builder.build().getCenter();
     }
-    }
+}

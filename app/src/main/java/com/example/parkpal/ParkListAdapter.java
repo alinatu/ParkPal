@@ -28,13 +28,13 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Activity activity = (Activity) _context;
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.park_row_layout, parent, false);
+        }
         // Get the data item for this position
         if (position < filteredParkList.size()) {
             Park park = filteredParkList.get(position);
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.park_row_layout, parent, false);
-            }
 
             // Populate the data into the template view using the data object
             String name = park.getName();
@@ -73,8 +73,6 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            //, Boolean benches, Boolean fountains, Boolean playgrounds, Boolean sportsFields, Boolean washrooms
-
             String filterString = constraint.toString().toLowerCase();
 
             FilterResults results = new FilterResults();
@@ -110,8 +108,8 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            System.out.println("TESTING in publishResults");
             filteredParkList = (ArrayList<Park>) results.values;
+            Park_Search_Activity.parkObjectList = filteredParkList;
             notifyDataSetChanged();
         }
 
