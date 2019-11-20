@@ -222,6 +222,7 @@ public class Park_Search_Activity extends AppCompatActivity {
                     System.out.println("Text [" + s + "]");
 
                     adapter.getFilter().filter(s.toString());
+                    lv.requestLayout();
                     //lv.setAdapter(adapter);
                 }
 
@@ -240,23 +241,28 @@ public class Park_Search_Activity extends AppCompatActivity {
                  @Override
                  public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
                      if (isChecked) {
-                         System.out.println(fullParkObjectList.size());
-                         for (int i = 0; i < fullParkObjectList.size(); i++) {
-                             //System.out.println("TESTING");
-                             if (!parkObjectList.contains(fullParkObjectList.get(i))) {
-                                 if (fullParkObjectList.get(i).hasBenches())
-                                     parkObjectList.add(fullParkObjectList.get(i));
-                                 lv.requestLayout();
+                         for (int i = parkObjectList.size() - 1; i >= 0; i--) {
+                             if (!parkObjectList.get(i).hasBenches()) {
+                                 parkObjectList.remove(i);
                              }
                          }
+                         System.out.println("test");
                      } else {
-                         for (int i = 0; i < fullParkObjectList.size(); i++) {
-                             if (!fullParkObjectList.get(i).hasBenches())
-                                 parkObjectList.remove(fullParkObjectList.get(i));
-                             lv.requestLayout();
-                         }
+                         parkObjectList =  new ArrayList<>(fullParkObjectList);
+                         System.out.println("WHAT THA FUACKADKS");
+//                         for (int i = 0; i < fullParkObjectList.size(); i++) {
+//                             Park park = fullParkObjectList.get(i);
+//                             if (!parkObjectList.contains(park)) {
+//                                 if (park.hasBenches())
+//                                     parkObjectList.add(park);
+//                             }
+//                         }
                      }
-                     }
+                     adapter.notifyDataSetChanged();
+                     lv.setAdapter(adapter);
+                     lv.requestLayout();
+
+                 }
                  }
             );
             final CheckBox dog_area_search_checkbox = findViewById(R.id.dog_area_search_checkbox);

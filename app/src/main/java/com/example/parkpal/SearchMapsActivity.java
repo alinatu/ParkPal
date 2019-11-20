@@ -117,15 +117,8 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
         // OFFLEASH_DOG_AREAS
         type = "OFFLEASH_DOG_AREAS";
-//        for (GeoJsonPolygon polygon : park.getDogAreas().get(0).getCoordinates().get(0)) {
-//            dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, type));
-//        }
+
         for (int i = 0; i < park.getDogAreas().size(); i++) {
-//            opts=new PolygonOptions();
-//            for (LatLng location : polygon) {
-//                opts.add(location);
-//            }
-//            mapPoly = mMap.addPolygon(opts.strokeColor(Color.BLACK).fillColor(getColor(R.color.fillPark)));
             LatLng location = park.getDogAreas().get(i).getCoordinates();
             Bitmap Marker = findMarkerForPoint(type);
             MarkerOptions markerOptions = new MarkerOptions().position(location)
@@ -176,29 +169,6 @@ public class SearchMapsActivity extends FragmentActivity implements OnMapReadyCa
             com.google.android.gms.maps.model.Marker marker = mMap.addMarker(markerOptions);
         }
     }
-//
-//    public LatLng findCenterOfPolygon(GeoJsonPolygon polygon) {
-//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//        List<? extends List<LatLng>> polygonPoints = polygon.getCoordinates();
-//        for (List<LatLng> latLngs : polygonPoints) {
-//            for (LatLng latLng : latLngs) {
-//                builder.include(latLng);
-//            }
-//        }
-//        return builder.build().getCenter();
-//    }
-//
-//    public Marker AddMarkerToCenterOfPolygon(GeoJsonPolygon polygon, Bitmap Marker, String title) {
-//
-//        MarkerOptions markerOptions = new MarkerOptions().position(findCenterOfPolygon(polygon))
-//                .draggable(false)
-//                .flat(true)
-//                .icon(BitmapDescriptorFactory.fromBitmap(Marker))
-//                .visible(false)
-//                .title(title);
-//        Marker marker = mMap.addMarker(markerOptions);
-//        return marker;
-//    }
 
     public Bitmap findMarkerForPoint(String type) {
         BitmapDrawable bitmapDraw = null;

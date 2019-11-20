@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
     Context _context;
-    private ArrayList<Park> parkList = null;
-    private ArrayList<Park> filteredParkList = null;
+//    private ArrayList<Park> parkList = null;
+//    private ArrayList<Park> filteredParkList = null;
     private ItemFilter mFilter = new ItemFilter();
     private static final String TAG = ParkListAdapter.class.getSimpleName();
     public ParkListAdapter(Context context, ArrayList<Park> parkList) {
         super(context, 0, parkList);
-        this.parkList = parkList;
-        this.filteredParkList = parkList;
+//        this.parkList = parkList;
+//        this.filteredParkList = parkList;
         _context = context;
     }
 
@@ -33,12 +33,12 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.park_row_layout, parent, false);
         }
         // Get the data item for this position
-        if (position < filteredParkList.size()) {
-            Park park = filteredParkList.get(position);
+        //if (position < Park_Search_Activity.parkObjectList.size()) {
+            Park park = Park_Search_Activity.parkObjectList.get(position);
 
             // Populate the data into the template view using the data object
             String name = park.getName();
-            System.out.println(name);
+            //System.out.println(name);
             TextView parkName = convertView.findViewById(R.id.parkName);
             parkName.setText(name);
 
@@ -60,7 +60,7 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
             TextView numWashrooms = convertView.findViewById(R.id.numWashrooms);
             numWashrooms.setText("Washrooms: " + park.getNumWashrooms());
 
-        }
+        //}
         // Return the completed view to render on screen
         return convertView;
     }
@@ -77,15 +77,15 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
 
             FilterResults results = new FilterResults();
 
-            ArrayList<Park> list = parkList;
+            //ArrayList<Park> list = new ArrayList<Park>();
 
-            int count = list.size();
-            final ArrayList<Park> nlist = new ArrayList<Park>(count);
+            //int count = list.size();
+            final ArrayList<Park> nlist = new ArrayList<Park>(Park_Search_Activity.parkObjectList.size());
 
             Park park;
-            System.out.println("Size of count: " + count);
-            for (int i = 0; i < count; i++) {
-                park = list.get(i);
+            //System.out.println("Size of count: " + count);
+            for (int i = 0; i < Park_Search_Activity.parkObjectList.size(); i++) {
+                park = Park_Search_Activity.parkObjectList.get(i);
                 System.out.println("Park name: " + park.getName().toLowerCase());
                 if (park.getName().toLowerCase().contains(filterString)) {
                     nlist.add(park);
@@ -108,9 +108,7 @@ public class ParkListAdapter extends ArrayAdapter<Park> implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredParkList = (ArrayList<Park>) results.values;
-            Park_Search_Activity.parkObjectList = filteredParkList;
-            notifyDataSetChanged();
+            Park_Search_Activity.parkObjectList = (ArrayList<Park>) results.values;
         }
 
     }
