@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -54,6 +56,9 @@ public class Park_Search_Activity extends AppCompatActivity {
     private ArrayList<JSONObject> parkList;
     static ArrayList<Park> parkObjectList;
     static ArrayList<Park> fullParkObjectList;
+    static ArrayList<Park> oldParkObjectList;
+    private List<CheckBox> checkBoxes;
+
     protected GoogleMap map;
 
     @Override
@@ -71,6 +76,7 @@ public class Park_Search_Activity extends AppCompatActivity {
         parkList = new ArrayList<JSONObject>();
         parkObjectList = new ArrayList<Park>();
         fullParkObjectList = new ArrayList<Park>();
+        checkBoxes = new ArrayList<>();
         lv = findViewById(R.id.park_list);
         new GetContacts().execute();
     }
@@ -158,7 +164,7 @@ public class Park_Search_Activity extends AppCompatActivity {
                         }
                     });
 
-                    fullParkObjectList = parkObjectList;
+                    fullParkObjectList = new ArrayList<>(parkObjectList);
 
                     for (int i = 1; i < jsonStr.length; i++) {
                         loadParkData(jsonStr[i]);
@@ -237,39 +243,71 @@ public class Park_Search_Activity extends AppCompatActivity {
             });
 
             final CheckBox bench_search_checkbox = findViewById(R.id.bench_search_checkbox);
-            bench_search_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                 @Override
-                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                     if (isChecked) {
-                         for (int i = parkObjectList.size() - 1; i >= 0; i--) {
-                             if (!parkObjectList.get(i).hasBenches()) {
-                                 parkObjectList.remove(i);
-                             }
-                         }
-                         System.out.println("test");
-                     } else {
-                         parkObjectList =  new ArrayList<>(fullParkObjectList);
-                         System.out.println("WHAT THA FUACKADKS");
-//                         for (int i = 0; i < fullParkObjectList.size(); i++) {
-//                             Park park = fullParkObjectList.get(i);
-//                             if (!parkObjectList.contains(park)) {
-//                                 if (park.hasBenches())
-//                                     parkObjectList.add(park);
-//                             }
-//                         }
-                     }
-                     adapter.notifyDataSetChanged();
-                     lv.setAdapter(adapter);
-                     lv.requestLayout();
-
-                 }
-                 }
-            );
             final CheckBox dog_area_search_checkbox = findViewById(R.id.dog_area_search_checkbox);
             final CheckBox fountain_search_checkbox = findViewById(R.id.fountain_search_checkbox);
             final CheckBox playground_search_checkbox = findViewById(R.id.playground_search_checkbox);
             final CheckBox sports_field_search_checkbox = findViewById(R.id.sports_field_search_checkbox);
             final CheckBox washrooms_search_checkbox = findViewById(R.id.washrooms_search_checkbox);
+
+            checkBoxes.add(bench_search_checkbox);
+            checkBoxes.add(dog_area_search_checkbox);
+            checkBoxes.add(fountain_search_checkbox);
+            checkBoxes.add(playground_search_checkbox);
+            checkBoxes.add(sports_field_search_checkbox);
+            checkBoxes.add(washrooms_search_checkbox);
+            System.out.println(checkBoxes.size());
+            for(CheckBox checkBox : checkBoxes) {
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        System.out.println("Before: " + parkObjectList.size());
+                        getParksBaseOnFilter(fullParkObjectList);
+                        System.out.println("After: " + parkObjectList.size());
+
+//                        for (int i = newPark.size() - 1; i >= 0; i--) {
+//                             if (!parkObjectList.contains(newPark.get(i))) {
+//                                 parkObjectList.remove(i);
+//                             }
+//                         }
+                    }
+                });
+            }
+//            bench_search_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                 @Override
+//                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+//                     if (isChecked) {
+//                         oldParkObjectList = new ArrayList<>();
+//                         for (int i = parkObjectList.size() - 1; i >= 0; i--) {
+//                             oldParkObjectList.add(parkObjectList.get(i));
+//                             if (!parkObjectList.get(i).hasBenches()) {
+//                                 parkObjectList.remove(i);
+//                             }
+//                         }
+//                         System.out.println("test");
+//                     } else {
+//                         for(int i = 0; i < oldParkObjectList.size(); i++) {
+//                             if(!parkObjectList.contains(oldParkObjectList.get(i))) {
+//                                 parkObjectList.add(oldParkObjectList.get(i));
+//                             }
+//                         }
+//
+////                         for (int i = 0; i < fullParkObjectList.size(); i++) {
+////                             Park park = fullParkObjectList.get(i);
+////                             if (!parkObjectList.contains(park)) {
+////                                 if (park.hasBenches())
+////                                     parkObjectList.add(park);
+////                             }
+////                         }
+//                     }
+//                     adapter.notifyDataSetChanged();
+//                     lv.setAdapter(adapter);
+//                     lv.requestLayout();
+//
+//                 }
+//                 }
+//            );
+
 
         }
 
@@ -367,5 +405,60 @@ public class Park_Search_Activity extends AppCompatActivity {
             }
         }
         return builder.build().getCenter();
+    }
+
+    public void getParksBaseOnFilter(ArrayList<Park> parks) {
+        parkObjectList = new ArrayList<>(fullParkObjectList);
+        for(int i = 0; i < checkBoxes.size(); i++) {
+            if(checkBoxes.get(i).isChecked()) {
+                System.out.println(i);
+                switch(i) {
+                    case 0:
+                        System.out.println("remove Benches");
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasBenches()) {
+                                System.out.println("remove Benches" + j);
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                    case 1:
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasDogAreas()) {
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                    case 2:
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasFountains()) {
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                    case 3:
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasPlaygrounds()) {
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                    case 4:
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasSportsFields()) {
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                    case 5:
+                        for(int j = parkObjectList.size() - 1; j >= 0; j--) {
+                            if(!parkObjectList.get(j).hasWashRoom()) {
+                                parkObjectList.remove(parkObjectList.get(j));
+                            }
+                        }
+                        break;
+                }
+            }
+        }
     }
 }

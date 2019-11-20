@@ -49,6 +49,37 @@ public class Park {
             return true;
         else return false;
     }
+
+    public boolean hasDogAreas(){
+        if (this.getNumDogAreas() > 0)
+            return true;
+        else return false;
+    }
+
+    public boolean hasFountains(){
+        if (this.getNumFountains() > 0)
+            return true;
+        else return false;
+    }
+
+    public boolean hasPlaygrounds(){
+        if (this.getNumPlaygrounds() > 0)
+            return true;
+        else return false;
+    }
+
+    public boolean hasSportsFields(){
+        if (this.getNumSportsFields() > 0)
+            return true;
+        else return false;
+    }
+
+    public boolean hasWashRoom(){
+        if (this.getNumWashrooms() > 0)
+            return true;
+        else return false;
+    }
+
     public int getNumBenches() {
         int count = 0;
         for (GeoJsonPoint point: benches) {
