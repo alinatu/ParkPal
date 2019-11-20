@@ -275,9 +275,6 @@ public class Park_Search_Activity extends AppCompatActivity {
                     }
                         for (Park park : parkObjectList) {
                             for (GeoJsonPolygon parkPoly : park.getPolygons()) {
-//                                for (int k = 0; k < parkPoly.getCoordinates().size(); k++) {
-//                                    latLngPoly = parkPoly.getCoordinates().get(k);
-//                                }
                                 java.util.List<LatLng> latLngPoly = parkPoly.getCoordinates().get(0);
                                 if (PolyUtil.containsLocation(latlng, latLngPoly, true)) {
                                     switch (type) {

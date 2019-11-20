@@ -1,14 +1,23 @@
 package com.example.parkpal;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-
-import android.os.Bundle;
-
-import com.google.android.gms.common.Feature;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,25 +27,38 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.MarkerManager;
+import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
-import com.google.maps.android.geojson.*;
+import com.google.maps.android.geojson.GeoJsonMultiPolygon;
+import com.google.maps.android.geojson.GeoJsonPointStyle;
+import com.google.maps.android.geojson.GeoJsonPolygon;
+import com.google.maps.android.geojson.GeoJsonPolygonStyle;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllParksMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class AllParksMapsActivity extends FragmentActivity
+        implements GoogleMap.OnMyLocationButtonClickListener,
+            GoogleMap.OnMyLocationClickListener,
+            OnMapReadyCallback,
+            ActivityCompat.OnRequestPermissionsResultCallback {
+
+    /**
+     * Request code for location permission request.
+     *
+     * @see #onRequestPermissionsResult(int, String[], int[])
+     */
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    /**
+     * Flag indicating whether a requested permission has been denied after returning in
+     * {@link #onRequestPermissionsResult(int, String[], int[])}.
+     */
+    private boolean mPermissionDenied = false;
 
     private GoogleMap mMap;
     ArrayList<GeoJsonLayer> parkLayers = new ArrayList<GeoJsonLayer>();
@@ -90,11 +112,13 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         } else {
             // Add a marker in New West and move the camera
             LatLng queensPark = new LatLng(49.216230, -122.906558);
-//        mMap.addMarker(new MarkerOptions().position(queensPark).title("Marker in Queen's Park"));
             mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(queensPark));
         }
 
+        mMap.setOnMyLocationButtonClickListener(this);
+        mMap.setOnMyLocationClickListener(this);
+        enableMyLocation();
 
 
         HttpHandler sh = new HttpHandler();
@@ -268,6 +292,69 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
         }
     }
 
+    /**
+     * Enables the My Location layer if the fine location permission has been granted.
+     */
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        } else if (mMap != null) {
+            // Access to the location has been granted to the app.
+            mMap.setMyLocationEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            return;
+        }
+
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+            // Enable the my location layer if the permission has been granted.
+            enableMyLocation();
+        } else {
+            // Display the missing permission error dialog when the fragments resume.
+            mPermissionDenied = true;
+        }
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        if (mPermissionDenied) {
+            // Permission was not granted, display error dialog.
+            showMissingPermissionError();
+            mPermissionDenied = false;
+        }
+    }
+
+    /**
+     * Displays a dialog with error message explaining that the location permission is missing.
+     */
+    private void showMissingPermissionError() {
+        PermissionUtils.PermissionDeniedDialog
+                .newInstance(true).show(getSupportFragmentManager(), "dialog");
+    }
+
     private static LatLngBounds getPolygonLatLngBounds(final List<LatLng> polygon) {
         final LatLngBounds.Builder centerBuilder = LatLngBounds.builder();
         for (LatLng point : polygon) {
@@ -282,21 +369,24 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
             JSONArray JArray = JObj.getJSONArray("features");
             final String type = JObj.getString("name");
             Bitmap Marker = findMarkerForPoint(type);
+            String markerName = null;
             for (int i = 0; i < JArray.length(); i++) {
                 JSONObject Obj = JArray.getJSONObject(i);
                 final GeoJsonLayer layer = new GeoJsonLayer(mMap, Obj);
                 GeoJsonPointStyle pointStyle = layer.getDefaultPointStyle();
                 pointStyle.setIcon(BitmapDescriptorFactory.fromBitmap(Marker));
-                pointStyle.setTitle(type);
                 pointStyle.setVisible(false);
                 switch (type) {
                     case "WASHROOMS":
+                        markerName = "Washroom";
                         washroomLayers.add(layer);
                         break;
                     case "BENCHES":
+                        markerName = "Bench";
                         benchLayers.add(layer);
                         break;
                     case "OFFLEASH_DOG_AREAS":
+                        markerName = "Dog Area";
                         GeoJsonMultiPolygon multiPolygon = null;
                         Iterable<GeoJsonFeature> features = layer.getFeatures();
                         for (GeoJsonFeature feature : features) {
@@ -304,11 +394,11 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                                 multiPolygon = (GeoJsonMultiPolygon) feature.getGeometry();
                                 List<GeoJsonPolygon> polygons = multiPolygon.getPolygons();
                                 for (GeoJsonPolygon polygon : polygons) {
-                                    dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, type));
+                                    dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, markerName));
                                 }
                             } else if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")){
                                 GeoJsonPolygon polygon = (GeoJsonPolygon)feature.getGeometry();
-                                dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, type));
+                                dogareaMarkers.add(AddMarkerToCenterOfPolygon(polygon, Marker, markerName));
                             }
                         }
 
@@ -320,15 +410,19 @@ public class AllParksMapsActivity extends FragmentActivity implements OnMapReady
                         dogareaLayers.add(layer);
                         break;
                     case "DRINKING_FOUNTAINS":
+                        markerName = "Drinking Fountains";
                         fountainLayers.add(layer);
                         break;
                     case "PLAYGROUNDS":
+                        markerName = "Playground";
                         playgroundLayers.add(layer);
                         break;
                     case "SPORTS_FIELDS":
+                        markerName = "Sports Field";
                         sportsfieldLayers.add(layer);
                         break;
                 }
+                pointStyle.setTitle(markerName);
                 layer.addLayerToMap();
             }
         } catch (JSONException e) {
