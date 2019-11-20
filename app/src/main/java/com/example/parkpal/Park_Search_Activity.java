@@ -84,7 +84,7 @@ public class Park_Search_Activity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        parkObjectList = fullParkObjectList;
+//        parkObjectList = fullParkObjectList;
         super.onResume();
     }
 
@@ -261,10 +261,14 @@ public class Park_Search_Activity extends AppCompatActivity {
 
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        parkObjectList.clear();
                         System.out.println("Before: " + parkObjectList.size());
                         getParksBaseOnFilter(fullParkObjectList);
                         System.out.println("After: " + parkObjectList.size());
 
+                        adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
+                        lv.setAdapter(adapter);
+//                     lv.requestLayout();
 //                        for (int i = newPark.size() - 1; i >= 0; i--) {
 //                             if (!parkObjectList.contains(newPark.get(i))) {
 //                                 parkObjectList.remove(i);
