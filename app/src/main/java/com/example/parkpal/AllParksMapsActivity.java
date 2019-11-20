@@ -54,6 +54,8 @@ public class AllParksMapsActivity extends FragmentActivity
      */
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
+    private static final int POLYGON_PADDING_PREFERENCE = 200;
+
     /**
      * Flag indicating whether a requested permission has been denied after returning in
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
@@ -69,6 +71,8 @@ public class AllParksMapsActivity extends FragmentActivity
     ArrayList<GeoJsonLayer> playgroundLayers = new ArrayList<GeoJsonLayer>();
     ArrayList<GeoJsonLayer> sportsfieldLayers = new ArrayList<GeoJsonLayer>();
     ArrayList<Marker> dogareaMarkers = new ArrayList<>();
+
+    Marker marker;
 
     private int position;
     Park park;
@@ -105,7 +109,6 @@ public class AllParksMapsActivity extends FragmentActivity
 
         if (park != null) {
             // Zoom to the map
-            final int POLYGON_PADDING_PREFERENCE = 200;
             List<LatLng> polygon = park.getPolygons().get(0).getCoordinates().get(0);
             final LatLngBounds latLngBounds = getPolygonLatLngBounds(polygon);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, POLYGON_PADDING_PREFERENCE));
@@ -130,7 +133,25 @@ public class AllParksMapsActivity extends FragmentActivity
             // looping through All Contacts
             for (int i = 0; i < jsonParks.length(); i++) {
                 JSONObject parksObj = jsonParks.getJSONObject(i);
+                final String name = parksObj.getJSONObject("properties").get("Name").toString();
+
                 GeoJsonLayer layer = new GeoJsonLayer(mMap, parksObj);
+//                Iterable<GeoJsonFeature> features = layer.getFeatures();
+//                for (GeoJsonFeature feature : features) {
+//                    if (feature.getGeometry() != null && feature.getGeometry().getType().equals("Polygon")) {
+//                        final GeoJsonPolygon polygon = (GeoJsonPolygon) feature.getGeometry();
+//                        layer.setOnFeatureClickListener(new GeoJsonLayer.GeoJsonOnFeatureClickListener() {
+//                            @Override
+//                            public void onFeatureClick(GeoJsonFeature geoJsonFeature) {
+//                                System.out.println("clicked: "+ name);
+//                                List<LatLng> latLngList = polygon.getCoordinates().get(0);
+//                                final LatLngBounds latLngBounds = getPolygonLatLngBounds(latLngList);
+//                                CameraUpdateFactory.newLatLngBounds(latLngBounds, POLYGON_PADDING_PREFERENCE);
+//                                marker = AddMarkerToCenterOfPolygon(polygon, findMarkerForPoint("PARKS"), name);
+//                            }
+//                        });
+//                    }
+//                }
                 parkLayers.add(layer);
                 GeoJsonPolygonStyle polygonStyle = layer.getDefaultPolygonStyle();
                 polygonStyle.setFillColor(getColor(R.color.fillPark));
@@ -457,6 +478,8 @@ public class AllParksMapsActivity extends FragmentActivity
         BitmapDrawable bitmapDraw = null;
         int size = 60;
         switch (type) {
+            case "PARKS":
+                bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.park);
             case "WASHROOMS":
                 bitmapDraw = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.washroom);
                 break;

@@ -58,6 +58,7 @@ public class Park_Search_Activity extends AppCompatActivity {
     static ArrayList<Park> fullParkObjectList;
     static ArrayList<Park> oldParkObjectList;
     private List<CheckBox> checkBoxes;
+    private String userEntry;
 
     protected GoogleMap map;
 
@@ -73,6 +74,7 @@ public class Park_Search_Activity extends AppCompatActivity {
             }
         });
 
+        userEntry = null;
         parkList = new ArrayList<JSONObject>();
         parkObjectList = new ArrayList<Park>();
         fullParkObjectList = new ArrayList<Park>();
@@ -222,26 +224,7 @@ public class Park_Search_Activity extends AppCompatActivity {
                 }
             });
 
-            keywordSearchEditText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    System.out.println("Text [" + s + "]");
-
-                    adapter.getFilter().filter(s.toString());
-                    lv.requestLayout();
-                    //lv.setAdapter(adapter);
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count,
-                                              int after) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                }
-            });
-
+            //filter function
             final CheckBox bench_search_checkbox = findViewById(R.id.bench_search_checkbox);
             final CheckBox dog_area_search_checkbox = findViewById(R.id.dog_area_search_checkbox);
             final CheckBox fountain_search_checkbox = findViewById(R.id.fountain_search_checkbox);
@@ -263,56 +246,37 @@ public class Park_Search_Activity extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                         parkObjectList.clear();
                         System.out.println("Before: " + parkObjectList.size());
-                        getParksBaseOnFilter(fullParkObjectList);
+                        getParksBaseOnFilter();
                         System.out.println("After: " + parkObjectList.size());
 
                         adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
                         lv.setAdapter(adapter);
-//                     lv.requestLayout();
-//                        for (int i = newPark.size() - 1; i >= 0; i--) {
-//                             if (!parkObjectList.contains(newPark.get(i))) {
-//                                 parkObjectList.remove(i);
-//                             }
-//                         }
                     }
                 });
             }
-//            bench_search_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                 @Override
-//                 public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-//                     if (isChecked) {
-//                         oldParkObjectList = new ArrayList<>();
-//                         for (int i = parkObjectList.size() - 1; i >= 0; i--) {
-//                             oldParkObjectList.add(parkObjectList.get(i));
-//                             if (!parkObjectList.get(i).hasBenches()) {
-//                                 parkObjectList.remove(i);
-//                             }
-//                         }
-//                         System.out.println("test");
-//                     } else {
-//                         for(int i = 0; i < oldParkObjectList.size(); i++) {
-//                             if(!parkObjectList.contains(oldParkObjectList.get(i))) {
-//                                 parkObjectList.add(oldParkObjectList.get(i));
-//                             }
-//                         }
-//
-////                         for (int i = 0; i < fullParkObjectList.size(); i++) {
-////                             Park park = fullParkObjectList.get(i);
-////                             if (!parkObjectList.contains(park)) {
-////                                 if (park.hasBenches())
-////                                     parkObjectList.add(park);
-////                             }
-////                         }
-//                     }
-//                     adapter.notifyDataSetChanged();
-//                     lv.setAdapter(adapter);
-//                     lv.requestLayout();
-//
-//                 }
-//                 }
-//            );
 
+            //search function
+            final EditText keywordSearch = findViewById(R.id.keywordSearch);
 
+            keywordSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    parkObjectList.clear();
+                    if(!charSequence.equals(null)) {
+                        userEntry = charSequence.toString();
+                    }
+                    getParksBaseOnFilter();
+                    System.out.println(parkObjectList.size());
+                    adapter = new ParkListAdapter(Park_Search_Activity.this, parkObjectList);
+                    lv.setAdapter(adapter);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) { }
+            });
         }
 
     }
@@ -411,8 +375,13 @@ public class Park_Search_Activity extends AppCompatActivity {
         return builder.build().getCenter();
     }
 
-    public void getParksBaseOnFilter(ArrayList<Park> parks) {
+    public void getParksBaseOnFilter() {
         parkObjectList = new ArrayList<>(fullParkObjectList);
+        for(int i = parkObjectList.size() - 1; i >= 0; i--) {
+            if(!parkObjectList.get(i).getName().toLowerCase().contains(userEntry.toLowerCase())) {
+                parkObjectList.remove(i);
+            }
+        }
         for(int i = 0; i < checkBoxes.size(); i++) {
             if(checkBoxes.get(i).isChecked()) {
                 System.out.println(i);
