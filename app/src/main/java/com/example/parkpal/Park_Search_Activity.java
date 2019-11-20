@@ -246,12 +246,14 @@ public class Park_Search_Activity extends AppCompatActivity {
                              if (!parkObjectList.contains(fullParkObjectList.get(i))) {
                                  if (fullParkObjectList.get(i).hasBenches())
                                      parkObjectList.add(fullParkObjectList.get(i));
+                                 lv.requestLayout();
                              }
                          }
                      } else {
                          for (int i = 0; i < fullParkObjectList.size(); i++) {
                              if (!fullParkObjectList.get(i).hasBenches())
                                  parkObjectList.remove(fullParkObjectList.get(i));
+                             lv.requestLayout();
                          }
                      }
                      }
