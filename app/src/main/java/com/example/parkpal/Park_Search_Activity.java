@@ -74,7 +74,7 @@ public class Park_Search_Activity extends AppCompatActivity {
             }
         });
 
-        userEntry = null;
+        userEntry = "";
         parkList = new ArrayList<JSONObject>();
         parkObjectList = new ArrayList<Park>();
         fullParkObjectList = new ArrayList<Park>();
@@ -377,9 +377,11 @@ public class Park_Search_Activity extends AppCompatActivity {
 
     public void getParksBaseOnFilter() {
         parkObjectList = new ArrayList<>(fullParkObjectList);
-        for(int i = parkObjectList.size() - 1; i >= 0; i--) {
-            if(!parkObjectList.get(i).getName().toLowerCase().contains(userEntry.toLowerCase())) {
-                parkObjectList.remove(i);
+        if(!userEntry.isEmpty()) {
+            for (int i = parkObjectList.size() - 1; i >= 0; i--) {
+                if (!parkObjectList.get(i).getName().toLowerCase().contains(userEntry.toLowerCase())) {
+                    parkObjectList.remove(i);
+                }
             }
         }
         for(int i = 0; i < checkBoxes.size(); i++) {
