@@ -54,12 +54,6 @@ public class Park_Search_Activity extends AppCompatActivity {
     private ArrayList<JSONObject> parkList;
     static ArrayList<Park> parkObjectList;
     static ArrayList<Park> fullParkObjectList;
-    ArrayList<Park> benchParkList;
-//    ArrayList<Park> benchParkList;
-//    ArrayList<Park> benchParkList;
-//    ArrayList<Park> benchParkList;
-//    ArrayList<Park> benchParkList;
-//    ArrayList<Park> benchParkList;
     protected GoogleMap map;
 
     @Override
@@ -245,7 +239,21 @@ public class Park_Search_Activity extends AppCompatActivity {
             bench_search_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                  @Override
                  public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-
+                     if (isChecked) {
+                         System.out.println(fullParkObjectList.size());
+                         for (int i = 0; i < fullParkObjectList.size(); i++) {
+                             //System.out.println("TESTING");
+                             if (!parkObjectList.contains(fullParkObjectList.get(i))) {
+                                 if (fullParkObjectList.get(i).hasBenches())
+                                     parkObjectList.add(fullParkObjectList.get(i));
+                             }
+                         }
+                     } else {
+                         for (int i = 0; i < fullParkObjectList.size(); i++) {
+                             if (!fullParkObjectList.get(i).hasBenches())
+                                 parkObjectList.remove(fullParkObjectList.get(i));
+                         }
+                     }
                      }
                  }
             );

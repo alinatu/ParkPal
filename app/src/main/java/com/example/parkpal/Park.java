@@ -44,6 +44,11 @@ public class Park {
     public void addPlayground(GeoJsonPoint playground) {playgrounds.add(playground);}
     public void addSportsField(GeoJsonPoint sportsField) {sportsFields.add(sportsField);}
     public void addWashroom(GeoJsonPoint washroom) {washrooms.add(washroom);}
+    public boolean hasBenches(){
+        if (this.getNumBenches() > 0)
+            return true;
+        else return false;
+    }
     public int getNumBenches() {
         int count = 0;
         for (GeoJsonPoint point: benches) {
