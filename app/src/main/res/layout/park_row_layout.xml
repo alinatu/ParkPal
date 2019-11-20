@@ -26,7 +26,8 @@
             android:id="@+id/parkName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/hammersmith_one" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -37,13 +38,15 @@
                 android:id="@+id/numBenches"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/hammersmith_one" />
 
             <TextView
                 android:id="@+id/numDogAreas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/hammersmith_one" />
 
         </LinearLayout>
 
@@ -56,13 +59,15 @@
             android:id="@+id/numFountains"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/hammersmith_one" />
 
         <TextView
             android:id="@+id/numPlaygrounds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/hammersmith_one" />
 
         </LinearLayout>
 
@@ -75,13 +80,15 @@
                 android:id="@+id/numSportsFields"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/hammersmith_one" />
 
             <TextView
                 android:id="@+id/numWashrooms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/hammersmith_one" />
 
         </LinearLayout>
 

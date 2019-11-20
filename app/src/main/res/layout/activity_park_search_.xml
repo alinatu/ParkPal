@@ -134,16 +134,12 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/park_search_btn"
+
+    <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/fontColor"
-        android:fontFamily="@font/hammersmith_one"
-        android:text="@string/search_for_parks" />
-
-
-
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
     <ListView
         android:id="@+id/park_list"
