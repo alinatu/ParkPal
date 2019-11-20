@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Park_Search_Activity extends AppCompatActivity {
 
@@ -137,6 +139,14 @@ public class Park_Search_Activity extends AppCompatActivity {
                             }
                         }
                     }
+
+                    Collections.sort(parkObjectList, new Comparator<Park>() {
+                        @Override
+                        public int compare(Park lhs, Park rhs) {
+                            return (lhs.getName().compareTo(rhs.getName()));
+                        }
+                    });
+
                     for (int i = 1; i < jsonStr.length; i++) {
                         loadParkData(jsonStr[i]);
                     }
